@@ -1,0 +1,2086 @@
+/* ============================================================
+   BENGAL — Editorial Scrollytelling Stylesheet
+   Aesthetic: archival manuscript meets contemporary editorial
+   ============================================================ */
+
+/* ---------- 1. Design Tokens ---------- */
+:root {
+  /* Earth palette — drawn from Pala bronze, Murshidabad miniature, indigo cloth */
+  --paper:        #F1EADA;
+  --paper-2:      #E6DDC8;
+  --paper-3:      #D6CBB1;
+  --ink:          #1A1410;
+  --ink-soft:     #3A2E24;
+  --ink-mute:     #5C4E3F;
+
+  --terracotta:   #B5532A;
+  --terracotta-2: #8E3E1F;
+  --indigo:       #1F3A5F;
+  --indigo-deep:  #122340;
+  --monsoon:      #2E5A4B;
+  --vermillion:   #C0392B;
+  --gold:         #B8923B;
+
+  /* Track accents */
+  --bd-accent:    #006A4E;  /* Bangladesh flag green */
+  --wb-accent:    #C0392B;  /* warm red */
+
+  /* Typography stack — Fraunces (variable serif) + Hind Siliguri (Bangla) + JetBrains Mono */
+  --font-display: 'Fraunces', 'Times New Roman', serif;
+  --font-body:    'Fraunces', Georgia, serif;
+  --font-sans:    'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+  --font-bangla:  'Hind Siliguri', 'Noto Serif Bengali', serif;
+
+  /* Spatial rhythm */
+  --col:          min(72ch, 92vw);
+  --gutter:       max(2rem, 5vw);
+  --section-pad:  clamp(4rem, 10vh, 9rem);
+
+  /* Motion */
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:      cubic-bezier(0.7, 0, 0.84, 0);
+  --duration:     720ms;
+
+  /* Live (theme-swappable) tokens — light defaults */
+  --bg:           var(--paper);
+  --bg-2:         var(--paper-2);
+  --bg-3:         var(--paper-3);
+  --fg:           var(--ink);
+  --fg-soft:      var(--ink-soft);
+  --fg-mute:      var(--ink-mute);
+  --accent:       var(--terracotta);
+  --accent-2:     var(--terracotta-2);
+  --accent-cool:  var(--indigo);
+  --hairline:     rgba(26, 20, 16, 0.08);
+  --hairline-2:   rgba(26, 20, 16, 0.10);
+  --veil:         rgba(241, 234, 218, 0.78);
+  --veil-strong:  rgba(241, 234, 218, 0.92);
+  --shadow-card:  0 1px 0 rgba(26, 20, 16, 0.08), 0 12px 40px -10px rgba(26, 20, 16, 0.18);
+  --shadow-float: 0 8px 32px -8px rgba(26, 20, 16, 0.18);
+}
+
+/* Dark theme — desaturated indigo-grey, Claude-style night */
+:root[data-theme="dark"] {
+  --bg:           #1F2228;   /* slate-grey base with a hint of blue */
+  --bg-2:         #262A32;   /* card surfaces */
+  --bg-3:         #2F343D;   /* dividers / borders */
+  --fg:           #E8E4D8;   /* warm off-white, echoes paper */
+  --fg-soft:      #C4BFB1;
+  --fg-mute:      #8A8578;
+  --accent:       #D87A4F;   /* lifted terracotta, more luminous on dark */
+  --accent-2:     #B5532A;
+  --accent-cool:  #6E8FC4;   /* lifted indigo */
+  --hairline:     rgba(232, 228, 216, 0.08);
+  --hairline-2:   rgba(232, 228, 216, 0.12);
+  --veil:         rgba(31, 34, 40, 0.82);
+  --veil-strong:  rgba(31, 34, 40, 0.94);
+  --shadow-card:  0 1px 0 rgba(0, 0, 0, 0.35), 0 12px 40px -10px rgba(0, 0, 0, 0.55);
+  --shadow-float: 0 8px 32px -8px rgba(0, 0, 0, 0.55);
+
+  /* Track accents — keep but slightly lifted for contrast */
+  --bd-accent:    #2E9B72;
+  --wb-accent:    #E0594A;
+}
+
+/* ---------- 2. Base ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: clamp(15px, 0.95vw + 11px, 18px);
+  background: var(--bg);
+  transition: background-color 0.45s var(--ease-out);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--fg);
+  background: var(--bg);
+  line-height: 1.6;
+  font-feature-settings: 'liga', 'kern', 'onum';
+  font-variation-settings: 'opsz' 14, 'SOFT' 50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.45s var(--ease-out), color 0.45s var(--ease-out);
+}
+
+/* Paper grain — subtle layered noise */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(181, 83, 42, 0.04) 0%, transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(31, 58, 95, 0.04) 0%, transparent 60%);
+  mix-blend-mode: multiply;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  transition: opacity 0.45s var(--ease-out);
+}
+
+:root[data-theme="dark"] body::before { mix-blend-mode: screen; opacity: 0.55; }
+:root[data-theme="dark"] body::after  { opacity: 0.18; mix-blend-mode: screen; }
+
+::selection {
+  background: var(--terracotta);
+  color: var(--paper);
+}
+
+/* ---------- 3. Typography ---------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--fg);
+}
+
+h1 { font-size: clamp(2.5rem, 8vw, 6.5rem); font-variation-settings: 'opsz' 144, 'SOFT' 100; }
+h2 { font-size: clamp(2rem, 5vw, 4rem);     font-variation-settings: 'opsz' 96,  'SOFT' 80; }
+h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-variation-settings: 'opsz' 48,  'SOFT' 60; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+
+.bangla {
+  font-family: var(--font-bangla);
+  font-weight: 500;
+}
+
+p {
+  max-width: var(--col);
+  margin-bottom: 1.15em;
+  font-size: 1.05rem;
+  color: var(--fg-soft);
+}
+
+/* First-letter accent — simple bold + color, no drop-cap float */
+.drop-cap::first-letter {
+  font-weight: 700;
+  color: var(--terracotta);
+}
+
+/* Inline Bangla script embedded in English prose */
+.bangla {
+  font-family: var(--font-bangla);
+  font-style: normal;
+  font-weight: 500;
+  color: var(--indigo);
+}
+
+a {
+  color: var(--terracotta-2);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: color 0.2s var(--ease-out);
+}
+a:hover { color: var(--indigo); }
+
+blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-variation-settings: 'opsz' 36, 'SOFT' 100;
+  line-height: 1.3;
+  color: var(--ink);
+  border-left: 3px solid var(--terracotta);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  max-width: 36ch;
+}
+blockquote cite {
+  display: block;
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-top: 0.8rem;
+  font-weight: 400;
+}
+
+/* ---------- 4. Layout ---------- */
+.container {
+  width: var(--col);
+  margin: 0 auto;
+}
+
+.wide {
+  width: min(96rem, 92vw);
+  margin: 0 auto;
+}
+
+section { position: relative; z-index: 3; }
+
+/* ---------- 5. HERO ---------- */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--section-pad) var(--gutter) 5rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  padding: 2rem clamp(1rem, 3vw, 2.5rem);
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 1.4rem;
+  font-weight: 500;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 11vw, 8.5rem);
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--ink);
+  position: relative;
+}
+
+.hero-title em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  font-weight: 400;
+  color: var(--terracotta);
+}
+
+.hero-bangla {
+  font-family: var(--font-bangla);
+  font-size: clamp(1.6rem, 4.5vw, 3rem);
+  color: var(--indigo);
+  margin: 1.4rem 0 1.2rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.hero-sub {
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  max-width: 72ch;
+  margin: 0 auto;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  padding: 0.85rem 1.4rem;
+  background: rgba(241, 234, 218, 0.78);
+  border-radius: 6px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* The <br> in the subtitle is an authored break and must be honored;
+   wrap behavior shouldn't compete with it on narrow screens. */
+.hero-sub br { display: inline; }
+
+.hero-meta {
+  margin-top: 2.8rem;
+  display: flex;
+  gap: clamp(1.2rem, 2.2vw, 2rem);
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 58rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #000;
+  font-weight: 600;
+}
+.hero-meta span { display: flex; flex-direction: column; gap: 0.3rem; align-items: center; }
+.hero-meta strong {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #000;
+  font-weight: 600;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #000;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 2;
+  opacity: 1;
+}
+.scroll-hint::after {
+  content: '';
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(to bottom, #000, transparent);
+  animation: scrollPulse 2.6s var(--ease-in-out) infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50%      { opacity: 1; transform: scaleY(1.3); transform-origin: top; }
+}
+
+/* ---------- Hero background — illustrated painting backdrop ---------- */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* The painting — anchored to the bottom so figures, instruments and boats
+   sit beneath the headline while the central sky/negative space frames the type. */
+.hero-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('hero-banner.png');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+
+/* Soft cream wash so type reads cleanly even where the painting is busy */
+.hero-bg-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 38%, rgba(241, 234, 218, 0.6) 0%, rgba(241, 234, 218, 0) 75%),
+    linear-gradient(180deg, rgba(241, 234, 218, 0.45) 0%, rgba(241, 234, 218, 0) 28%, rgba(241, 234, 218, 0) 60%, rgba(241, 234, 218, 0.75) 92%);
+}
+
+/* Legacy decorative SVG layers — kept hidden; the painting carries the visual
+   weight on its own and the mandalas/alpana tile were redundant against it. */
+.hero-bg-tile,
+.hero-bg-left,
+.hero-bg-right,
+.hero-bg-script { display: none; }
+
+@media (max-width: 600px) {
+  .hero-bg-image {
+    background-position: center center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-left, .hero-bg-right { animation: none; }
+}
+
+/* ---------- 6. CHAPTER DIVIDERS ---------- */
+.chapter {
+  padding: calc(var(--section-pad) * 1.2) var(--gutter);
+  text-align: center;
+  z-index: 4;
+  position: relative;
+}
+
+.chapter-mark {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  position: relative;
+  padding: 0 2rem;
+}
+.chapter-mark::before, .chapter-mark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 1px;
+  background: var(--terracotta);
+}
+.chapter-mark::before { right: 100%; }
+.chapter-mark::after  { left: 100%; }
+
+.chapter-title {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-style: italic;
+  color: var(--ink);
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  margin-bottom: 1rem;
+}
+
+.chapter-range {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-mute);
+  letter-spacing: 0.2em;
+}
+
+/* Optional kicker line beneath the range — used sparingly on chapters
+   where a single editorial thesis frames the section ahead. The river
+   list under "The Land" is the canonical example. */
+.chapter-kicker {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: 'opsz' 36, 'SOFT' 100;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 44ch;
+  margin: 2rem auto 0;
+  position: relative;
+  padding-top: 1.6rem;
+}
+.chapter-kicker::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.2rem;
+  height: 1px;
+  background: var(--terracotta);
+  opacity: 0.55;
+}
+
+/* ---------- 7. SCENE / TIMELINE EVENT ---------- */
+.scene {
+  padding: var(--section-pad) var(--gutter);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+  max-width: 96rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.scene[data-track="bangladesh"] { --scene-accent: var(--bd-accent); }
+.scene[data-track="west-bengal"] { --scene-accent: var(--wb-accent); }
+.scene[data-track="shared"]    { --scene-accent: var(--terracotta); }
+
+.scene-meta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.scene-meta .order {
+  width: 2.2rem;
+  height: 2.2rem;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--scene-accent, var(--terracotta));
+  border-radius: 50%;
+  color: var(--scene-accent, var(--terracotta));
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.scene-meta .date { color: var(--ink); font-weight: 500; }
+.scene-meta .track-tag {
+  margin-left: auto;
+  padding: 0.3rem 0.8rem;
+  background: var(--scene-accent, var(--terracotta));
+  color: var(--paper);
+  border-radius: 999px;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+}
+
+.scene-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  margin-bottom: 0.5rem;
+  font-variation-settings: 'opsz' 96, 'SOFT' 100;
+  line-height: 1;
+}
+
+.scene-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  color: var(--terracotta-2);
+  margin-bottom: 2rem;
+  font-variation-settings: 'opsz' 36, 'SOFT' 100;
+}
+
+.scene-summary {
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--ink);
+  font-style: italic;
+  font-variation-settings: 'opsz' 24, 'SOFT' 100;
+  margin-bottom: 2.5rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 1.5rem 0;
+}
+
+.scene-body p {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 56ch;
+}
+
+.scene-quote {
+  margin: 3rem 0;
+  position: relative;
+}
+
+.scene-quote::before {
+  content: '"';
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 7rem;
+  color: var(--terracotta);
+  opacity: 0.2;
+  top: -2rem;
+  left: -1rem;
+  line-height: 1;
+}
+
+.scene-disputed {
+  margin-top: 2.5rem;
+  padding: 1.2rem 1.5rem;
+  background: var(--paper-2);
+  border-left: 3px solid var(--gold);
+  font-size: 0.92rem;
+  color: var(--ink-mute);
+  line-height: 1.5;
+  font-style: italic;
+}
+.scene-disputed strong {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- 8. SCENE MEDIA (right column) ---------- */
+.scene-media {
+  position: sticky;
+  top: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.media-card {
+  aspect-ratio: 4 / 5;
+  background: var(--paper-2);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 1px 0 rgba(26, 20, 16, 0.08),
+    0 12px 40px -10px rgba(26, 20, 16, 0.18);
+}
+
+.media-card svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.media-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.92) contrast(1.02);
+  transition: transform 1.6s var(--ease-out), filter 0.6s var(--ease-out);
+}
+
+.media-card:hover img {
+  transform: scale(1.04);
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.media-card .media-credit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.8rem 1rem;
+  background: linear-gradient(to top, rgba(26, 20, 16, 0.85), rgba(26, 20, 16, 0));
+  color: rgba(241, 234, 218, 0.85);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+.media-card .media-caption {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: var(--paper-2);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--paper-3);
+}
+
+.metric-cell {
+  padding: 1.1rem 1.2rem;
+  border-right: 1px solid var(--paper-3);
+  border-bottom: 1px solid var(--paper-3);
+}
+.metric-cell:nth-child(2n) { border-right: none; }
+.metric-cell:nth-last-child(-n+2) { border-bottom: none; }
+
+.metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 0.4rem;
+}
+
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+  font-weight: 500;
+  font-variation-settings: 'opsz' 36, 'SOFT' 80;
+  line-height: 1.15;
+}
+
+.scene-sources {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-mute);
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--paper-3);
+}
+.scene-sources strong {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.65rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+/* ---------- 9. SIDE-PANEL (running metrics, AI-2027 style) ---------- */
+.side-panel {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 200px;
+  z-index: 50;
+  background: rgba(241, 234, 218, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--paper-3);
+  border-radius: 4px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 8px 32px -8px rgba(26, 20, 16, 0.18);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+  font-family: var(--font-mono);
+  pointer-events: none;
+}
+
+.side-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.side-panel-header {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--paper-3);
+}
+
+.side-metric {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.7rem;
+  font-size: 0.8rem;
+}
+.side-metric:last-child { margin-bottom: 0; }
+.side-metric .label {
+  color: var(--ink-mute);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+.side-metric .value {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 36, 'SOFT' 80;
+  transition: color 0.4s var(--ease-out);
+  line-height: 1.2;
+}
+.side-metric .value.flash { color: var(--terracotta); }
+
+.year-label {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--terracotta);
+  font-weight: 500;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+/* ---------- 10. DUAL-TRACK (post-1947) ---------- */
+.dual-track-intro {
+  padding: var(--section-pad) var(--gutter);
+  text-align: center;
+  max-width: 70ch;
+  margin: 0 auto;
+}
+
+.dual-track-intro h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.track-selector {
+  display: inline-flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--paper-2);
+  border-radius: 999px;
+  margin-top: 2rem;
+  border: 1px solid var(--paper-3);
+}
+
+@media (max-width: 720px) {
+  .track-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.5rem;
+    border-radius: 1.25rem;
+    width: min(20rem, calc(100vw - 3rem));
+  }
+  .track-selector button {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 0.7rem;
+  }
+}
+
+.track-selector button {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: var(--ink-mute);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.track-selector button.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.track-selector button:hover:not(.active) {
+  color: var(--ink);
+}
+
+body.track-filter-bangladesh .scene[data-track="west-bengal"]   { opacity: 0.2; }
+body.track-filter-west-bengal  .scene[data-track="bangladesh"]   { opacity: 0.2; }
+
+.scene { transition: opacity 0.6s var(--ease-out); }
+
+/* ---------- 11. CULTURE / CLOSING SECTIONS ---------- */
+.culture-section {
+  padding: var(--section-pad) var(--gutter);
+  background: var(--paper);
+  color: var(--ink);
+  position: relative;
+}
+
+.culture-section h2 {
+  color: var(--ink);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-style: italic;
+  margin-bottom: 4rem;
+  text-align: center;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+}
+
+.culture-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  max-width: 96rem;
+  margin: 0 auto;
+}
+
+/* Drop to 2 columns on tablets so cards keep enough width to read */
+@media (max-width: 1100px) {
+  .culture-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+}
+
+.culture-card {
+  text-align: left;
+}
+.culture-card .big-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  color: var(--terracotta);
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  line-height: 1;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.culture-card h3 {
+  color: var(--ink);
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  font-style: italic;
+}
+.culture-card p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  max-width: none;
+}
+
+/* ---------- Diaspora — compact interactive grid ----------
+   Old design was a tall stack of 8 full-width rows (~800px). The
+   replacement is a two-column grid (drops to one column on phones)
+   where each cell carries country, bar and count in a tight package
+   and the hub-city detail is surfaced in a single shared readout
+   row above the grid on hover/focus/tap. */
+.diaspora-chart {
+  margin: 3rem auto 0;
+  max-width: 72rem;
+}
+
+.diaspora-summary {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 1.4rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(26, 20, 16, 0.10);
+  flex-wrap: wrap;
+}
+.diaspora-summary-left { display: flex; flex-direction: column; gap: 0.3rem; }
+.diaspora-summary-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  font-variation-settings: 'opsz' 96, 'SOFT' 100;
+  color: var(--terracotta);
+  line-height: 1;
+  font-weight: 400;
+}
+.diaspora-summary-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* The shared readout — replaces the per-row hub line from the old layout */
+.diaspora-readout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+  font-family: var(--font-mono);
+  text-align: right;
+  min-height: 2.6rem;
+  opacity: 0.6;
+  transition: opacity 0.3s var(--ease-out);
+}
+.diaspora-readout.active { opacity: 1; }
+.diaspora-readout-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 500;
+}
+.diaspora-readout-value {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: 'opsz' 36, 'SOFT' 100;
+  font-size: 1rem;
+  color: var(--terracotta-2);
+  min-height: 1.3em;
+}
+
+/* The grid itself — 2 columns on desktop, 1 on mobile */
+.diaspora-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem 2.5rem;
+}
+
+/* Each cell is a button (keyboard focus + click toggle) but visually flat */
+.diaspora-cell {
+  display: grid;
+  grid-template-columns: 9rem 1fr 3.5rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.55rem 0.6rem;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  transition: background-color 0.25s var(--ease-out);
+}
+.diaspora-cell:hover,
+.diaspora-cell:focus-visible,
+.diaspora-cell.active {
+  background: rgba(181, 83, 42, 0.08);
+  outline: none;
+}
+
+.diaspora-cell-country {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+}
+
+.diaspora-cell-bar {
+  display: block;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(26, 20, 16, 0.06);
+  overflow: hidden;
+  position: relative;
+}
+.diaspora-cell-bar-fill {
+  display: block;
+  height: 100%;
+  width: calc(var(--scale, 1) * 100%);
+  background: linear-gradient(to right, var(--terracotta), var(--gold));
+  border-radius: 3px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+.diaspora-cell.visible .diaspora-cell-bar-fill,
+.diaspora-cell:hover  .diaspora-cell-bar-fill,
+.diaspora-cell.active .diaspora-cell-bar-fill {
+  transform: scaleX(1);
+}
+
+.diaspora-cell-count {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-align: right;
+  font-weight: 500;
+}
+
+/* ---------- 12. CLOSING ---------- */
+.closing {
+  position: relative;
+  padding: calc(var(--section-pad) * 1.2) var(--gutter) calc(var(--section-pad) * 0.7);
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.closing-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+/* Background banner — Bengali cultural illustration, defocused */
+.closing-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.closing-bg-image {
+  position: absolute;
+  inset: -3% 0; /* vertical bleed for blur; no horizontal overflow */
+  background-image: url('closing-banner.png');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  filter: blur(8px) saturate(0.85);
+  opacity: 0.7;
+  /* Longer soft fade-in so the painting dissolves out of the cream rather than appearing as a band */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.9) 45%, rgba(0,0,0,1) 60%, rgba(0,0,0,1) 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.9) 45%, rgba(0,0,0,1) 60%, rgba(0,0,0,1) 100%);
+}
+/* Cream veil + soft center radial so text reads cleanly through the illustration */
+.closing-bg-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 45%, rgba(241, 234, 218, 0.78) 0%, rgba(241, 234, 218, 0.35) 65%, rgba(241, 234, 218, 0.2) 100%),
+    linear-gradient(180deg, rgba(241, 234, 218, 0.5) 0%, rgba(241, 234, 218, 0.25) 50%, rgba(241, 234, 218, 0.6) 100%);
+}
+
+.closing h2 {
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+/* Legacy class (kept for safety, no longer rendered) */
+.closing-bangla {
+  display: none;
+}
+
+/* Bangla phrase that leads the closing section */
+.closing-bangla-echo {
+  font-family: var(--font-bangla);
+  font-weight: 500;
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  line-height: 1.4;
+  color: var(--indigo);
+  margin: 0 auto 3rem;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .closing-bangla-echo {
+    white-space: normal;
+    font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+  }
+}
+
+.closing p {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0 auto 1.5em;
+  max-width: 50ch;
+}
+
+/* On narrow screens let the headline wrap rather than overflow */
+@media (max-width: 720px) {
+  .closing h2 { white-space: normal; }
+}
+
+.colophon {
+  margin-top: 6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  line-height: 1.8;
+}
+.colophon strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+/* ---------- 13. NAVIGATION (top progress + chapter nav) ---------- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem var(--gutter);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(241, 234, 218, 0.92) 0%,
+    rgba(241, 234, 218, 0.85) 70%,
+    rgba(241, 234, 218, 0) 100%
+  );
+  backdrop-filter: blur(8px) saturate(1.1);
+  -webkit-backdrop-filter: blur(8px) saturate(1.1);
+}
+
+.top-bar .brand {
+  color: var(--ink);
+  font-weight: 500;
+  pointer-events: auto;
+}
+.top-bar .brand em {
+  font-family: var(--font-display);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-size: 1.05rem;
+}
+
+.top-bar .chapter-indicator {
+  color: var(--ink-mute);
+  pointer-events: auto;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--terracotta);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 70;
+  transition: transform 0.1s linear;
+}
+
+/* ---------- 14. RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .scene {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-block: 5rem;
+  }
+  .scene-media {
+    position: relative;
+    top: auto;
+    order: -1;
+  }
+  .side-panel {
+    display: none;
+  }
+  .hero-meta { gap: 2rem; }
+  .scene-meta { flex-wrap: wrap; }
+  .scene-meta .track-tag { margin-left: 0; }
+  blockquote { font-size: 1.2rem; }
+}
+
+@media (max-width: 720px) {
+  .top-bar .chapter-indicator { display: none; }
+  .culture-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+  /* Diaspora: single column on phones, tighter inner spacing */
+  .diaspora-grid { grid-template-columns: 1fr; gap: 0.3rem; }
+  .diaspora-cell {
+    grid-template-columns: 7rem 1fr 3rem;
+    gap: 0.7rem;
+    padding: 0.45rem 0.4rem;
+  }
+  .diaspora-cell-country { font-size: 0.72rem; }
+  .diaspora-cell-count   { font-size: 0.74rem; }
+  .diaspora-summary { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .diaspora-readout { align-items: flex-start; text-align: left; min-height: 2.2rem; }
+  .diaspora-chart { margin-top: 2rem; }
+}
+
+/* ---------- 15. MOTION ---------- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-up-delay-1 { transition-delay: 0.1s; }
+.fade-up-delay-2 { transition-delay: 0.2s; }
+.fade-up-delay-3 { transition-delay: 0.3s; }
+.fade-up-delay-4 { transition-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .fade-up { opacity: 1; transform: none; }
+}
+
+/* ---------- 14. SITE FOOTER ---------- */
+.site-footer {
+  text-align: center;
+  padding: 0.6rem var(--gutter) 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  background: var(--bg);
+  transition: background-color 0.45s var(--ease-out), color 0.45s var(--ease-out);
+}
+.site-footer-inner {
+  max-width: 28rem;
+  margin: 0 auto;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--hairline);
+}
+
+/* ============================================================
+   16. TOP-BAR CONTROLS — theme toggle + right cluster
+   ============================================================ */
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  pointer-events: auto;
+}
+
+.theme-toggle {
+  pointer-events: auto;
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--hairline-2);
+  background: var(--veil);
+  color: var(--fg-soft);
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: rotate(-12deg);
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.theme-icon {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+/* Show sun in light mode (so user can click to go dark), moon in dark mode */
+.theme-icon-moon { display: none; }
+:root[data-theme="dark"] .theme-icon-sun  { display: none; }
+:root[data-theme="dark"] .theme-icon-moon { display: block; }
+
+/* ============================================================
+   17. JUMP-TO-BOTTOM FLOATING WIDGET
+   ============================================================ */
+.jump-bottom {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  z-index: 65;
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--hairline-2);
+  background: var(--veil);
+  color: var(--fg-soft);
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 0;
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.4s var(--ease-out),
+    transform 0.4s var(--ease-out),
+    background-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out);
+}
+.jump-bottom.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.jump-bottom:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateX(-50%) translateY(2px);
+}
+.jump-bottom:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.jump-bottom svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+/* Hide once the user is near the bottom (no point jumping further) */
+.jump-bottom.at-bottom {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+@media (max-width: 720px) {
+  .jump-bottom { width: 32px; height: 32px; }
+  .jump-bottom svg { width: 14px; height: 14px; }
+  .theme-toggle  { width: 30px; height: 30px; }
+  .theme-icon    { width: 15px; height: 15px; }
+  .top-bar-right { gap: 0.7rem; }
+}
+
+/* ============================================================
+   18. DARK THEME — comprehensive overrides
+   ----------------------------------------------------------------
+   Most of the stylesheet still references the fixed --paper/--ink
+   palette. Rather than touch every selector, the rules below
+   re-skin the affected components when [data-theme="dark"] is set.
+   ============================================================ */
+
+:root[data-theme="dark"] .hero,
+:root[data-theme="dark"] .culture-section {
+  background: var(--bg);
+}
+
+/* Top bar — swap the cream gradient for a dark wash */
+:root[data-theme="dark"] .top-bar {
+  background: linear-gradient(
+    to bottom,
+    rgba(31, 34, 40, 0.92) 0%,
+    rgba(31, 34, 40, 0.85) 70%,
+    rgba(31, 34, 40, 0) 100%
+  );
+}
+:root[data-theme="dark"] .top-bar .brand        { color: var(--fg); }
+:root[data-theme="dark"] .top-bar .chapter-indicator { color: var(--fg-mute); }
+
+/* Progress bar */
+:root[data-theme="dark"] .progress-bar { background: var(--accent); }
+
+/* Hero typography */
+:root[data-theme="dark"] .hero-title           { color: var(--fg); }
+:root[data-theme="dark"] .hero-title em        { color: var(--accent); }
+:root[data-theme="dark"] .hero-bangla          { color: var(--accent-cool); }
+:root[data-theme="dark"] .hero-eyebrow         { color: var(--accent); }
+:root[data-theme="dark"] .hero-sub {
+  color: var(--fg-soft);
+  background: rgba(31, 34, 40, 0.7);
+}
+:root[data-theme="dark"] .hero-meta            { color: var(--fg); }
+:root[data-theme="dark"] .hero-meta strong     { color: var(--fg); }
+:root[data-theme="dark"] .scroll-hint          { color: var(--fg); }
+:root[data-theme="dark"] .scroll-hint::after {
+  background: linear-gradient(to bottom, var(--fg), transparent);
+}
+
+/* Hero painting: lower opacity so it sits inside the dark page instead of
+   glowing against it. The painting is left intact (no inversion) so the
+   art stays recognisable. */
+:root[data-theme="dark"] .hero-bg-image {
+  filter: brightness(0.55) saturate(0.85) contrast(1.05);
+}
+:root[data-theme="dark"] .hero-bg-vignette {
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 38%, rgba(31, 34, 40, 0.55) 0%, rgba(31, 34, 40, 0) 75%),
+    linear-gradient(180deg, rgba(31, 34, 40, 0.5) 0%, rgba(31, 34, 40, 0.05) 28%, rgba(31, 34, 40, 0.1) 60%, rgba(31, 34, 40, 0.85) 92%);
+}
+
+/* Chapter dividers */
+:root[data-theme="dark"] .chapter-mark        { color: var(--accent); }
+:root[data-theme="dark"] .chapter-mark::before,
+:root[data-theme="dark"] .chapter-mark::after { background: var(--accent); }
+:root[data-theme="dark"] .chapter-title       { color: var(--fg); }
+:root[data-theme="dark"] .chapter-range       { color: var(--fg-mute); }
+:root[data-theme="dark"] .chapter-kicker      { color: var(--fg-soft); }
+:root[data-theme="dark"] .chapter-kicker::before { background: var(--accent); }
+
+/* Scenes */
+:root[data-theme="dark"] .scene-meta          { color: var(--fg-mute); }
+:root[data-theme="dark"] .scene-meta .date    { color: var(--fg); }
+:root[data-theme="dark"] .scene-meta .track-tag { color: var(--bg); }
+:root[data-theme="dark"] .scene-title         { color: var(--fg); }
+:root[data-theme="dark"] .scene-subtitle      { color: var(--accent); }
+:root[data-theme="dark"] .scene-summary {
+  color: var(--fg);
+  border-top-color: var(--hairline-2);
+  border-bottom-color: var(--hairline-2);
+}
+:root[data-theme="dark"] .scene-body p        { color: var(--fg-soft); }
+:root[data-theme="dark"] .scene-quote::before { color: var(--accent); }
+:root[data-theme="dark"] .scene-disputed {
+  background: var(--bg-2);
+  color: var(--fg-mute);
+}
+
+/* Media + metric cards */
+:root[data-theme="dark"] .media-card {
+  background: var(--bg-2);
+  box-shadow: var(--shadow-card);
+}
+:root[data-theme="dark"] .metric-grid {
+  background: var(--bg-2);
+  border-color: var(--bg-3);
+}
+:root[data-theme="dark"] .metric-cell {
+  border-right-color: var(--bg-3);
+  border-bottom-color: var(--bg-3);
+}
+:root[data-theme="dark"] .metric-label { color: var(--fg-mute); }
+:root[data-theme="dark"] .metric-value { color: var(--fg); }
+:root[data-theme="dark"] .scene-sources {
+  color: var(--fg-mute);
+  border-top-color: var(--bg-3);
+}
+:root[data-theme="dark"] .scene-sources strong { color: var(--fg); }
+
+/* Side panel */
+:root[data-theme="dark"] .side-panel {
+  background: rgba(38, 42, 50, 0.94);
+  border-color: var(--bg-3);
+  box-shadow: var(--shadow-float);
+}
+:root[data-theme="dark"] .side-panel-header {
+  color: var(--fg-mute);
+  border-bottom-color: var(--bg-3);
+}
+:root[data-theme="dark"] .side-metric .label { color: var(--fg-mute); }
+:root[data-theme="dark"] .side-metric .value { color: var(--fg); }
+:root[data-theme="dark"] .side-metric .value.flash { color: var(--accent); }
+:root[data-theme="dark"] .year-label { color: var(--accent); }
+
+/* Track selector */
+:root[data-theme="dark"] .track-selector {
+  background: var(--bg-2);
+  border-color: var(--bg-3);
+}
+:root[data-theme="dark"] .track-selector button { color: var(--fg-mute); }
+:root[data-theme="dark"] .track-selector button.active {
+  background: var(--fg);
+  color: var(--bg);
+}
+:root[data-theme="dark"] .track-selector button:hover:not(.active) { color: var(--fg); }
+
+/* Culture cards */
+:root[data-theme="dark"] .culture-section h2  { color: var(--fg); }
+:root[data-theme="dark"] .culture-card .big-num { color: var(--accent); }
+:root[data-theme="dark"] .culture-card h3     { color: var(--fg); }
+:root[data-theme="dark"] .culture-card p      { color: var(--fg-soft); }
+
+/* Diaspora — compact grid */
+:root[data-theme="dark"] .diaspora-summary {
+  border-bottom-color: var(--hairline-2);
+}
+:root[data-theme="dark"] .diaspora-summary-num   { color: var(--accent); }
+:root[data-theme="dark"] .diaspora-summary-label { color: var(--fg-mute); }
+:root[data-theme="dark"] .diaspora-readout-label { color: var(--fg); }
+:root[data-theme="dark"] .diaspora-readout-value { color: var(--accent); }
+:root[data-theme="dark"] .diaspora-cell-country,
+:root[data-theme="dark"] .diaspora-cell-count   { color: var(--fg); }
+:root[data-theme="dark"] .diaspora-cell-bar     { background: rgba(232, 228, 216, 0.08); }
+:root[data-theme="dark"] .diaspora-cell-bar-fill {
+  background: linear-gradient(to right, var(--accent), #C9A24E);
+}
+:root[data-theme="dark"] .diaspora-cell:hover,
+:root[data-theme="dark"] .diaspora-cell:focus-visible,
+:root[data-theme="dark"] .diaspora-cell.active {
+  background: rgba(216, 122, 79, 0.12);
+}
+
+/* Closing section */
+:root[data-theme="dark"] .closing p           { color: var(--fg-soft); }
+:root[data-theme="dark"] .closing-bangla-echo { color: var(--accent-cool); }
+:root[data-theme="dark"] .closing-bg-image {
+  filter: blur(8px) saturate(0.7) brightness(0.5);
+  opacity: 0.55;
+}
+:root[data-theme="dark"] .closing-bg-veil {
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 45%, rgba(31, 34, 40, 0.78) 0%, rgba(31, 34, 40, 0.35) 65%, rgba(31, 34, 40, 0.2) 100%),
+    linear-gradient(180deg, rgba(31, 34, 40, 0.5) 0%, rgba(31, 34, 40, 0.25) 50%, rgba(31, 34, 40, 0.6) 100%);
+}
+
+/* Bangla inline + selection */
+:root[data-theme="dark"] .bangla { color: var(--accent-cool); }
+:root[data-theme="dark"] ::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Blockquote */
+:root[data-theme="dark"] blockquote {
+  color: var(--fg);
+  border-left-color: var(--accent);
+}
+:root[data-theme="dark"] blockquote cite { color: var(--fg-mute); }
+
+/* Links */
+:root[data-theme="dark"] a         { color: var(--accent); }
+:root[data-theme="dark"] a:hover   { color: var(--accent-cool); }
+
+/* Drop-cap accent */
+:root[data-theme="dark"] .drop-cap::first-letter { color: var(--accent); }
+
+/* Eyebrow */
+:root[data-theme="dark"] .eyebrow { color: var(--fg-mute); }
+
+/* ============================================================
+   19. TABLE OF CONTENTS — slide-out drawer
+   ----------------------------------------------------------------
+   Design intent: keep the chrome quiet. A small index button sits
+   on the LEFT of the top bar, mirroring the theme toggle on the
+   right. Clicking opens a thin (340px) drawer that slides in from
+   the left edge. On desktop (>=1100px) the page content SHIFTS to
+   the right — it does not get overlapped — so the reading column
+   stays comfortable and the drawer feels like it belongs in the
+   page's spatial logic. On narrower screens the drawer overlays
+   with a backdrop because shifting at that width would crush the
+   text column.
+   ============================================================ */
+
+/* --- TOC trigger button (lives in .top-bar on the left) --- */
+.toc-toggle {
+  pointer-events: auto;
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--hairline-2);
+  background: var(--veil);
+  color: var(--fg-soft);
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 0.9rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+.toc-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+.toc-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.toc-toggle svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+/* When drawer open, rotate the icon slightly to signal active state */
+body.toc-open .toc-toggle {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* .top-bar pairs the brand + this toggle on the left */
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+}
+
+/* --- The drawer itself --- */
+.toc-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 340px;
+  max-width: 86vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 80;          /* above top-bar (60), progress (70) */
+  background: var(--bg);
+  border-right: 1px solid var(--hairline-2);
+  box-shadow: 0 0 0 transparent;
+  transform: translateX(-100%);
+  transition:
+    transform 520ms var(--ease-out),
+    box-shadow 520ms var(--ease-out);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  visibility: hidden;
+}
+.toc-drawer.open {
+  transform: translateX(0);
+  box-shadow: 8px 0 40px -10px rgba(26, 20, 16, 0.18);
+  visibility: visible;
+}
+
+/* Header inside the drawer — mirrors the editorial chrome */
+.toc-drawer-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 1.6rem 1.6rem 1.1rem;
+  border-bottom: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+.toc-drawer-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.toc-drawer-title em {
+  font-family: var(--font-display);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-size: 1rem;
+  color: var(--fg);
+  margin-left: 0.4rem;
+}
+.toc-drawer-close {
+  background: none;
+  border: none;
+  color: var(--fg-mute);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  transition: color 0.25s var(--ease-out), background 0.25s var(--ease-out);
+}
+.toc-drawer-close:hover {
+  color: var(--accent);
+  background: var(--hairline);
+}
+.toc-drawer-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.toc-drawer-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* The scrollable list */
+.toc-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5rem 0 2.4rem;
+  /* Subtle scroll fade at the bottom edge */
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 24px), transparent 100%);
+          mask-image: linear-gradient(to bottom, black calc(100% - 24px), transparent 100%);
+  scrollbar-width: thin;
+  scrollbar-color: var(--hairline-2) transparent;
+}
+.toc-list::-webkit-scrollbar { width: 4px; }
+.toc-list::-webkit-scrollbar-thumb { background: var(--hairline-2); border-radius: 2px; }
+.toc-list::-webkit-scrollbar-track { background: transparent; }
+
+/* Group = one era (chapter heading + its scenes) */
+.toc-group {
+  position: relative;
+  padding: 0.9rem 1.6rem 0.6rem 2.2rem;
+}
+.toc-group + .toc-group {
+  margin-top: 0.2rem;
+}
+
+/* The vertical rail running through each group */
+.toc-group::before {
+  content: '';
+  position: absolute;
+  left: 1.6rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--hairline-2);
+}
+
+/* Chapter heading (era) — the bold marker on the rail */
+.toc-chapter {
+  position: relative;
+  padding: 0.35rem 0 0.65rem 0.9rem;
+  font-family: var(--font-display);
+  color: var(--fg);
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  display: block;
+  transition: color 0.25s var(--ease-out);
+}
+.toc-chapter:hover {
+  color: var(--accent);
+}
+.toc-chapter:focus-visible {
+  outline: none;
+}
+.toc-chapter:focus-visible .toc-chapter-label {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+}
+
+.toc-chapter-mark {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.toc-chapter-label {
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+}
+.toc-chapter-range {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--fg-mute);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-top: 0.15rem;
+}
+
+/* The hollow circle on the rail next to chapter headings */
+.toc-chapter::before {
+  content: '';
+  position: absolute;
+  left: -0.665rem;          /* sits centred on the rail */
+  top: 0.65rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1.5px solid var(--fg-mute);
+  transition: border-color 0.25s var(--ease-out), background 0.25s var(--ease-out);
+}
+.toc-chapter:hover::before,
+.toc-chapter.active::before {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+/* Individual scene entries */
+.toc-entries {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.toc-entry {
+  position: relative;
+}
+.toc-entry button {
+  display: grid;
+  grid-template-columns: 3.3rem 1fr;
+  gap: 0.7rem;
+  align-items: baseline;
+  padding: 0.4rem 0 0.4rem 0.9rem;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--fg-soft);
+  transition: color 0.2s var(--ease-out);
+  line-height: 1.35;
+}
+.toc-entry button:hover {
+  color: var(--accent);
+}
+.toc-entry button:focus-visible {
+  outline: none;
+  color: var(--accent);
+}
+.toc-entry button:focus-visible .toc-entry-title {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.toc-entry-year {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--fg-mute);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  transition: color 0.2s var(--ease-out);
+}
+.toc-entry-title {
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: inherit;
+}
+
+/* Small dot on the rail next to each scene */
+.toc-entry::before {
+  content: '';
+  position: absolute;
+  left: -0.46rem;
+  top: 0.95rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--fg-mute);
+  opacity: 0.55;
+  transition: background 0.2s var(--ease-out), opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+.toc-entry:hover::before {
+  background: var(--accent);
+  opacity: 1;
+}
+
+/* Active scene — currently in viewport */
+.toc-entry.active button {
+  color: var(--accent);
+}
+.toc-entry.active .toc-entry-year {
+  color: var(--accent);
+}
+.toc-entry.active::before {
+  background: var(--accent);
+  opacity: 1;
+  transform: scale(1.4);
+}
+
+/* Group that contains the active scene gets its chapter highlighted */
+.toc-group.active > .toc-chapter {
+  color: var(--accent);
+}
+.toc-group.active > .toc-chapter::before {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+/* Bottom credit line inside the drawer */
+.toc-drawer-footer {
+  padding: 0.9rem 1.6rem 1.2rem;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  flex-shrink: 0;
+}
+
+/* --- Backdrop (overlay mode only) --- */
+.toc-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 20, 16, 0.35);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 75;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 380ms var(--ease-out);
+}
+.toc-backdrop.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- Page-shift mode (desktop) ---
+   When the drawer opens on wide screens, the entire page content
+   slides to the right by the drawer's width. This keeps the reading
+   experience intact: nothing is hidden, just pushed gently aside.
+   The shift is applied to a set of top-level layout elements so the
+   side-panel + fixed widgets all move together. */
+@media (min-width: 1100px) {
+  .hero,
+  #timeline,
+  .closing,
+  .culture-section,
+  .site-footer {
+    transition: transform 520ms var(--ease-out);
+  }
+  body.toc-open .hero,
+  body.toc-open #timeline,
+  body.toc-open .closing,
+  body.toc-open .culture-section,
+  body.toc-open .site-footer {
+    transform: translateX(340px);
+    will-change: transform;
+  }
+  /* Top bar: not shifted. It spans the full viewport width and its
+     right-side controls (theme toggle, chapter indicator) need to stay
+     visible. The drawer simply covers the bar's left portion (drawer
+     z-index 80 > top-bar 60). The brand on the left sits behind the
+     drawer, which is fine — the drawer header restates the same brand. */
+  /* Progress bar: stays at viewport top — it uses its own scaleX
+     transform for scroll progress, so we can't translate it. At 2px
+     tall it's also visually inconsequential whether it sits under the
+     drawer or not. */
+  /* Side panel is anchored to the viewport right edge already;
+     leaving it untranslated keeps it floating in the visible corner. */
+  /* Jump-bottom: hidden while the drawer is open — the TOC already
+     gives the user a way to navigate, so this floating shortcut would
+     be redundant and would fight with its own transform-based states. */
+  body.toc-open .jump-bottom {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* No backdrop on desktop — the shift is feedback enough */
+  .toc-backdrop {
+    display: none;
+  }
+}
+
+/* On narrow screens, the drawer overlays + uses the backdrop. */
+@media (max-width: 1099px) {
+  .toc-drawer {
+    width: 320px;
+  }
+  body.toc-open {
+    overflow: hidden;  /* lock page scroll while overlay is open */
+  }
+}
+
+@media (max-width: 720px) {
+  .toc-toggle  { width: 30px; height: 30px; }
+  .toc-toggle svg { width: 14px; height: 14px; }
+  .toc-toggle { margin-right: 0.7rem; }
+  .toc-drawer { width: 86vw; max-width: 360px; }
+  .toc-drawer-header { padding: 1.2rem 1.2rem 0.9rem; }
+  .toc-group { padding: 0.8rem 1.2rem 0.5rem 1.9rem; }
+  .toc-group::before { left: 1.3rem; }
+}
+
+/* --- Dark theme overrides for the drawer --- */
+:root[data-theme="dark"] .toc-drawer {
+  background: var(--bg);
+  border-right-color: var(--bg-3);
+  box-shadow: 8px 0 40px -10px rgba(0, 0, 0, 0.55);
+}
+:root[data-theme="dark"] .toc-drawer-header {
+  border-bottom-color: var(--bg-3);
+}
+:root[data-theme="dark"] .toc-drawer-title       { color: var(--fg-mute); }
+:root[data-theme="dark"] .toc-drawer-title em    { color: var(--fg); }
+:root[data-theme="dark"] .toc-chapter            { color: var(--fg); }
+:root[data-theme="dark"] .toc-chapter-mark       { color: var(--fg-mute); }
+:root[data-theme="dark"] .toc-chapter-range      { color: var(--fg-mute); }
+:root[data-theme="dark"] .toc-entry button       { color: var(--fg-soft); }
+:root[data-theme="dark"] .toc-entry-year         { color: var(--fg-mute); }
+:root[data-theme="dark"] .toc-chapter::before    { background: var(--bg); border-color: var(--fg-mute); }
+:root[data-theme="dark"] .toc-entry::before      { background: var(--fg-mute); }
+:root[data-theme="dark"] .toc-group::before      { background: var(--bg-3); }
+:root[data-theme="dark"] .toc-drawer-footer {
+  border-top-color: var(--bg-3);
+  color: var(--fg-mute);
+}
+:root[data-theme="dark"] .toc-backdrop {
+  background: rgba(0, 0, 0, 0.55);
+}

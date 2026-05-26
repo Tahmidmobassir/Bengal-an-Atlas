@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Bengali People: a thirty-six-century scrollytelling of the world's third-largest ethno-linguistic group, from Pandu Rajar Dhibi to the 2026 elections.">
+  <title>সোনার বাংলা · The Bengali People: From the Ajay River to the 2026 Election</title>
+
+  <!-- Fonts: Fraunces variable serif + Hind Siliguri Bangla + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Hind+Siliguri:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top progress bar -->
+  <div class="progress-bar"></div>
+
+  <!-- Top navigation -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="toc-toggle" type="button" aria-label="Open table of contents" aria-expanded="false" aria-controls="toc-drawer" title="Table of contents">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="4" y1="6"  x2="20" y2="6"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="18" x2="14" y2="18"/>
+        </svg>
+      </button>
+      <div class="brand">Bengal · <em>An Atlas</em></div>
+    </div>
+    <div class="top-bar-right">
+      <div class="chapter-indicator">Origins</div>
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 3v1.5M12 19.5V21M3 12h1.5M19.5 12H21M5.6 5.6l1.1 1.1M17.3 17.3l1.1 1.1M5.6 18.4l1.1-1.1M17.3 6.7l1.1-1.1"/>
+        </svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Backdrop for the TOC drawer (only shown on narrow screens) -->
+  <div class="toc-backdrop" aria-hidden="true"></div>
+
+  <!-- Table of Contents drawer — built by JS from TIMELINE + ERAS -->
+  <aside id="toc-drawer" class="toc-drawer" aria-label="Table of contents" aria-hidden="true">
+    <div class="toc-drawer-header">
+      <div class="toc-drawer-title">Contents · <em>An Atlas</em></div>
+      <button class="toc-drawer-close" type="button" aria-label="Close table of contents" title="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="6" y1="6" x2="18" y2="18"/>
+          <line x1="18" y1="6" x2="6" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="toc-list" aria-label="Chapters and scenes">
+      <!-- populated by app.js -->
+    </nav>
+    <div class="toc-drawer-footer">36 centuries · 1 delta</div>
+  </aside>
+
+  <!-- Floating jump-to-bottom widget -->
+  <button class="jump-bottom" type="button" aria-label="Jump to bottom of page" title="Jump to bottom">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 5v14"/>
+      <path d="M6 13l6 6 6-6"/>
+    </svg>
+  </button>
+
+  <!-- Persistent side panel — appears after the hero -->
+  <aside class="side-panel"></aside>
+
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+  <section class="hero">
+    <!-- Hero background: layered cultural texture -->
+    <div class="hero-bg" aria-hidden="true">
+
+      <!-- Layer 0: the Jamini-Roy-style painting as primary backdrop -->
+      <div class="hero-bg-image"></div>
+
+      <!-- Layer 1: alpana-style repeating tile pattern (very faint, fills entire space) -->
+      <svg class="hero-bg-tile" preserveAspectRatio="xMidYMid slice"
+           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+        <defs>
+          <pattern id="alpana" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+            <!-- Central 8-petal alpana flower -->
+            <g transform="translate(60,60)" stroke="#B5532A" stroke-width="0.6" fill="none" opacity="0.45">
+              <circle r="4"/>
+              <circle r="14"/>
+              <circle r="28"/>
+              <!-- 8 petals -->
+              <g>
+                <ellipse cx="0" cy="-22" rx="4" ry="12"/>
+                <ellipse cx="0" cy="-22" rx="4" ry="12" transform="rotate(45)"/>
+                <ellipse cx="0" cy="-22" rx="4" ry="12" transform="rotate(90)"/>
+                <ellipse cx="0" cy="-22" rx="4" ry="12" transform="rotate(135)"/>
+                <ellipse cx="0" cy="-22" rx="4" ry="12" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-22" rx="4" ry="12" transform="rotate(225)"/>
+                <ellipse cx="0" cy="-22" rx="4" ry="12" transform="rotate(270)"/>
+                <ellipse cx="0" cy="-22" rx="4" ry="12" transform="rotate(315)"/>
+              </g>
+              <!-- Dots between petals -->
+              <g fill="#B5532A" stroke="none">
+                <circle cx="0" cy="-40" r="1"/>
+                <circle cx="28" cy="-28" r="1"/>
+                <circle cx="40" cy="0" r="1"/>
+                <circle cx="28" cy="28" r="1"/>
+                <circle cx="0" cy="40" r="1"/>
+                <circle cx="-28" cy="28" r="1"/>
+                <circle cx="-40" cy="0" r="1"/>
+                <circle cx="-28" cy="-28" r="1"/>
+              </g>
+            </g>
+            <!-- Corner accents at tile junctions -->
+            <g fill="#1F3A5F" opacity="0.25" stroke="none">
+              <circle cx="0" cy="0" r="1.5"/>
+              <circle cx="120" cy="0" r="1.5"/>
+              <circle cx="0" cy="120" r="1.5"/>
+              <circle cx="120" cy="120" r="1.5"/>
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#alpana)"/>
+      </svg>
+
+      <!-- Layer 2: large left-edge ornament — Pala-bronze inspired mandala -->
+      <svg class="hero-bg-left" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#B5532A" stroke-width="0.8" fill="none" opacity="0.5">
+          <circle cx="250" cy="250" r="240"/>
+          <circle cx="250" cy="250" r="200"/>
+          <circle cx="250" cy="250" r="160"/>
+          <circle cx="250" cy="250" r="120"/>
+          <circle cx="250" cy="250" r="80"/>
+          <circle cx="250" cy="250" r="40"/>
+        </g>
+        <!-- Lotus petals -->
+        <g transform="translate(250,250)" fill="#B5532A" stroke="none" opacity="0.35">
+          <ellipse cx="0" cy="-200" rx="10" ry="30"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(22.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(45)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(67.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(90)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(112.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(135)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(157.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(180)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(202.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(225)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(247.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(270)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(292.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(315)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(337.5)"/>
+        </g>
+        <!-- 8-pointed star inside -->
+        <g transform="translate(250,250)" stroke="#1F3A5F" stroke-width="0.6" fill="none" opacity="0.4">
+          <line x1="0" y1="-160" x2="0" y2="160"/>
+          <line x1="-160" y1="0" x2="160" y2="0"/>
+          <line x1="-113" y1="-113" x2="113" y2="113"/>
+          <line x1="113" y1="-113" x2="-113" y2="113"/>
+        </g>
+      </svg>
+
+      <!-- Layer 3: large right-edge ornament — mirror with indigo accents -->
+      <svg class="hero-bg-right" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#1F3A5F" stroke-width="0.8" fill="none" opacity="0.4">
+          <circle cx="250" cy="250" r="240"/>
+          <circle cx="250" cy="250" r="200"/>
+          <circle cx="250" cy="250" r="160"/>
+          <circle cx="250" cy="250" r="120"/>
+          <circle cx="250" cy="250" r="80"/>
+          <circle cx="250" cy="250" r="40"/>
+        </g>
+        <!-- Lotus petals — indigo version -->
+        <g transform="translate(250,250)" fill="#1F3A5F" stroke="none" opacity="0.28">
+          <ellipse cx="0" cy="-200" rx="10" ry="30"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(22.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(45)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(67.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(90)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(112.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(135)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(157.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(180)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(202.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(225)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(247.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(270)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(292.5)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(315)"/>
+          <ellipse cx="0" cy="-200" rx="10" ry="30" transform="rotate(337.5)"/>
+        </g>
+      </svg>
+
+      <!-- Layer 4: floating Bangla calligraphy in the side margins (Tagore fragments) -->
+      <div class="hero-bg-script hero-bg-script-tl">আমার সোনার বাংলা</div>
+      <div class="hero-bg-script hero-bg-script-bl">ভাষা শহীদ</div>
+      <div class="hero-bg-script hero-bg-script-tr">দেশ মাতৃকা</div>
+      <div class="hero-bg-script hero-bg-script-br">বিজয় দিবস</div>
+
+      <!-- Layer 5: terracotta vignette in corners -->
+      <div class="hero-bg-vignette"></div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-eyebrow">A History of the Bengali People</div>
+      <h1 class="hero-title">
+        Sonar<br>
+        <em>Bangla</em>
+      </h1>
+      <div class="hero-bangla">সোনার বাংলা</div>
+      <p class="hero-sub">
+        Thirty-six centuries on one delta. The rivers moved. The borders moved,<br>
+        yet the people remained the same, watching the maps change.
+      </p>
+
+      <div class="hero-meta">
+        <span>
+          <strong>~285M</strong>
+          Bangla speakers
+        </span>
+        <span>
+          <strong>6th</strong>
+          Largest language
+        </span>
+        <span>
+          <strong>~700</strong>
+          Rivers of Bangladesh
+        </span>
+        <span>
+          <strong>10M</strong>
+          Refugees, 1971
+        </span>
+        <span>
+          <strong>125 km</strong>
+          Longest unbroken beach
+        </span>
+      </div>
+    </div>
+
+    <div class="scroll-hint">Scroll to begin</div>
+  </section>
+
+  <!-- =========================================================
+       TIMELINE — rendered by JS from data.js
+       ========================================================= -->
+  <main id="timeline">
+    <!-- scenes injected here -->
+  </main>
+
+  <!-- =========================================================
+       CLOSING — sits as a reflection between the timeline and the data section
+       ========================================================= -->
+  <section class="closing">
+    <div class="closing-bg" aria-hidden="true">
+      <div class="closing-bg-image"></div>
+      <div class="closing-bg-veil"></div>
+    </div>
+
+    <div class="closing-inner">
+      <div class="closing-bangla-echo">আমার সোনার বাংলা, আমি তোমায় ভালোবাসি</div>
+
+      <p>
+        Tagore wrote that line in 1905, in protest against a partition Curzon would announce
+        that October. Sixty-six years later it became the national anthem of a country that did
+        not yet exist when he wrote it.
+      </p>
+      <p>
+        Golden Bengal, I love you. The history of the Bengali people is the history of writing
+        that line, in two scripts, on either side of a border that water keeps trying to dissolve,
+        in the teeth of every reason not to.
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CULTURE / DIASPORA SECTION
+       ========================================================= -->
+  <section class="culture-section">
+    <h2>What stays. What scatters.</h2>
+
+    <div class="culture-grid">
+      <div class="culture-card fade-up">
+        <div class="big-num">285M</div>
+        <h3>Speakers of Bangla</h3>
+        <p>The 6th most spoken native language on Earth, and the only one with a day on the UN calendar dedicated to its martyrs.</p>
+      </div>
+
+      <div class="culture-card fade-up fade-up-delay-1">
+        <div class="big-num">700</div>
+        <h3>Rivers of Bangladesh</h3>
+        <p>The Bengal delta is the largest in the world. Bangladesh shares fifty-eight cross-border rivers, more than any country on Earth. The land is so flat most of it sits under ten metres above sea level.</p>
+      </div>
+
+      <div class="culture-card fade-up fade-up-delay-2">
+        <div class="big-num">10K+</div>
+        <h3>Persian loanwords</h3>
+        <p>Of Bangla's ~100,000 words, roughly 28% are foreign loans: Persian, Arabic, Turkish, English. The lexicon itself maps Bengal's serial conquests.</p>
+      </div>
+
+      <div class="culture-card fade-up fade-up-delay-3">
+        <div class="big-num">$30B</div>
+        <h3>Diaspora remittances</h3>
+        <p>In FY 2024–25, Bangladeshis abroad sent home thirty billion dollars, a 25% jump over the year before. The second-largest source of foreign exchange after garments.</p>
+      </div>
+
+      <div class="culture-card fade-up fade-up-delay-4">
+        <div class="big-num">2</div>
+        <h3>National anthems by one man</h3>
+        <p>Rabindranath Tagore wrote both <em>Jana Gana Mana</em> (India, 1911) and <em>Amar Sonar Bangla</em> (Bangladesh, 1905 protest song). No other human has written two.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 7rem; margin-bottom: 2.5rem;">The Bengali diaspora</h2>
+    <div class="diaspora-chart"></div>
+  </section>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">Created by Tahmid Mobassir Khan</div>
+  </footer>
+
+  <!-- Scripts: data first, then app -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
