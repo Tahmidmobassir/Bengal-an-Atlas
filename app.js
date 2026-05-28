@@ -157,6 +157,9 @@ const ContentRenderer = {
           <img src="${m.image}"
                alt="${m.caption || event.title}"
                loading="lazy"
+               tabindex="0"
+               role="button"
+               aria-label="View larger: ${m.caption || event.title}"
                onerror="${onErr}">
           ${caption}
           ${credit}
@@ -1201,6 +1204,149 @@ const SceneIllustration = {
     </svg>`;
   },
 
+  // INTERACTIVE delta-rivers map — full Bengal-delta map with:
+  //   • a slider that morphs the Ganges main channel between
+  //     pre-1500 (west swing to Hooghly) and post-1500 (east swing
+  //     into the Padma), the geographic shift that made East Bengal
+  //     possible.
+  //   • six clickable city pins (Mahasthangarh, Gaur, Murshidabad,
+  //     Dhaka, Kolkata, Cox's Bazar) that jump to their scenes.
+  // The interactive wiring lives in DeltaMapController; this motif
+  // just renders the static markup and DeltaMapController.bind()
+  // is called once the DOM is in place.
+  'delta-rivers-interactive'() {
+    return `<div class="delta-map" data-delta-map>
+      <svg class="delta-map-svg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-label="Interactive Bengal delta map">
+        <!-- Background paper -->
+        <rect width="400" height="500" fill="#E6DDC8"/>
+
+        <!-- Subtle land tone in the delta -->
+        <path d="M 0 240 Q 60 235 130 245 Q 220 252 320 245 Q 370 240 400 240 L 400 500 L 0 500 Z" fill="#D6CBB1" opacity="0.6"/>
+
+        <!-- Bay of Bengal -->
+        <rect x="0" y="450" width="400" height="50" fill="#1F3A5F" opacity="0.18"/>
+        <path d="M 0 450 Q 100 445 200 455 Q 300 450 400 458 L 400 500 L 0 500 Z" fill="#1F3A5F" opacity="0.08"/>
+
+        <!-- India / Bangladesh land border (dashed faint line) -->
+        <path d="M 110 80 Q 100 180 130 240 Q 145 290 165 350 L 175 450"
+              fill="none" stroke="#5C4E3F" stroke-width="0.6"
+              stroke-dasharray="4 4" opacity="0.35"/>
+
+        <!-- Static rivers: Karatoya (the old Mauryan trade river, now thin), Brahmaputra/Jamuna, Meghna -->
+        <g fill="none" stroke="#1F3A5F" stroke-linecap="round">
+          <!-- Karatoya: thin, fading — historic but largely dry now -->
+          <path d="M 200 40 Q 195 100 200 160 Q 205 200 215 230"
+                stroke-width="1.6" opacity="0.4" stroke-dasharray="0 0"/>
+          <!-- Brahmaputra/Jamuna (main eastern artery) -->
+          <path d="M 280 30 Q 275 110 250 200 Q 240 280 240 350 Q 245 400 250 450"
+                stroke-width="4.5" opacity="0.78"/>
+          <!-- Meghna -->
+          <path d="M 360 60 Q 340 140 320 230 Q 305 310 300 380 Q 298 425 302 465"
+                stroke-width="3.5" opacity="0.75"/>
+          <!-- Confluence with Padma below Dhaka -->
+          <path d="M 260 360 Q 290 370 310 380" stroke-width="2" opacity="0.55"/>
+          <!-- Distributaries fanning into the delta -->
+          <path d="M 250 380 Q 220 410 195 445" stroke-width="1.8" opacity="0.6"/>
+          <path d="M 270 395 Q 280 420 285 455" stroke-width="1.8" opacity="0.6"/>
+          <path d="M 240 360 Q 215 395 200 440" stroke-width="1.6" opacity="0.55"/>
+          <path d="M 300 380 Q 320 410 330 455" stroke-width="1.6" opacity="0.55"/>
+          <!-- Hooghly fragment continuing to Kolkata (always present, but thin pre-1500 / thin post-1500 depending on slider) -->
+          <path d="M 145 410 Q 145 430 150 455" stroke-width="1.5" opacity="0.55"/>
+        </g>
+
+        <!-- THE MORPHING GANGES MAIN CHANNEL — animated by JS via path interpolation -->
+        <!-- Two reference paths, hidden visually but read by JS for interpolation: -->
+        <path id="ganges-path-pre"  d="M 50 70  Q 80 130 100 200 Q 115 280 130 340 Q 138 380 145 410" fill="none" stroke="none"/>
+        <path id="ganges-path-post" d="M 50 70  Q 90 130 130 200 Q 175 270 215 340 Q 240 380 260 410" fill="none" stroke="none"/>
+        <!-- The visible morphing path: starts as post-1500 by default (modern state) -->
+        <path id="ganges-channel"
+              d="M 50 70  Q 90 130 130 200 Q 175 270 215 340 Q 240 380 260 410"
+              fill="none" stroke="#1F3A5F" stroke-width="5"
+              stroke-linecap="round" opacity="0.85"/>
+
+        <!-- A small label on the channel to make the shift obvious -->
+        <text id="ganges-label" x="80" y="62" font-family="JetBrains Mono, monospace"
+              font-size="9" fill="#1F3A5F" letter-spacing="2" opacity="0.85">GANGES</text>
+        <text id="padma-label" x="180" y="280" font-family="JetBrains Mono, monospace"
+              font-size="9" fill="#1F3A5F" letter-spacing="2" opacity="0.85">PADMA</text>
+        <text x="265" y="180" font-family="JetBrains Mono, monospace"
+              font-size="8" fill="#1F3A5F" letter-spacing="2" opacity="0.6">BRAHMAPUTRA</text>
+        <text x="345" y="180" font-family="JetBrains Mono, monospace"
+              font-size="8" fill="#1F3A5F" letter-spacing="2" opacity="0.6">MEGHNA</text>
+
+        <!-- City pins — each is a button-like group -->
+        <!-- Pin layout, west-to-east-ish: -->
+
+        <!-- Mahasthangarh (north, on the old Karatoya near Bogra) -->
+        <g class="delta-pin" data-target="scene-mahasthangarh" transform="translate(195,165)" tabindex="0" role="button" aria-label="Jump to Mahasthangarh, c. 300 BCE">
+          <circle class="delta-pin-glow" r="14" fill="#B5532A" opacity="0"/>
+          <circle class="delta-pin-dot"  r="5" fill="#B5532A" stroke="#E6DDC8" stroke-width="1.5"/>
+          <text x="10" y="3" class="delta-pin-label" font-family="JetBrains Mono, monospace" font-size="9" fill="#1A1410">MAHASTHANGARH</text>
+        </g>
+
+        <!-- Gaur (NW Bengal, capital of Sultanate) -->
+        <g class="delta-pin" data-target="scene-bengal-sultanate" transform="translate(125,225)" tabindex="0" role="button" aria-label="Jump to Bengal Sultanate at Gaur, 1342">
+          <circle class="delta-pin-glow" r="14" fill="#B5532A" opacity="0"/>
+          <circle class="delta-pin-dot"  r="5" fill="#B5532A" stroke="#E6DDC8" stroke-width="1.5"/>
+          <text x="-44" y="3" class="delta-pin-label" font-family="JetBrains Mono, monospace" font-size="9" fill="#1A1410">GAUR</text>
+        </g>
+
+        <!-- Murshidabad (Nawab capital) -->
+        <g class="delta-pin" data-target="scene-nawabs-murshidabad" transform="translate(135,300)" tabindex="0" role="button" aria-label="Jump to Nawabs of Murshidabad, 1717">
+          <circle class="delta-pin-glow" r="14" fill="#B5532A" opacity="0"/>
+          <circle class="delta-pin-dot"  r="5" fill="#B5532A" stroke="#E6DDC8" stroke-width="1.5"/>
+          <text x="-78" y="3" class="delta-pin-label" font-family="JetBrains Mono, monospace" font-size="9" fill="#1A1410">MURSHIDABAD</text>
+        </g>
+
+        <!-- Dhaka (modern capital) -->
+        <g class="delta-pin" data-target="scene-mughal-islamization" transform="translate(263,355)" tabindex="0" role="button" aria-label="Jump to Mughal Bengal and Dhaka, 1610">
+          <circle class="delta-pin-glow" r="14" fill="#B5532A" opacity="0"/>
+          <circle class="delta-pin-dot"  r="5" fill="#B5532A" stroke="#E6DDC8" stroke-width="1.5"/>
+          <text x="10" y="3" class="delta-pin-label" font-family="JetBrains Mono, monospace" font-size="9" fill="#1A1410">DHAKA</text>
+        </g>
+
+        <!-- Kolkata (Hooghly mouth) -->
+        <g class="delta-pin" data-target="scene-renaissance" transform="translate(150,430)" tabindex="0" role="button" aria-label="Jump to Bengal Renaissance and Kolkata, 1828">
+          <circle class="delta-pin-glow" r="14" fill="#B5532A" opacity="0"/>
+          <circle class="delta-pin-dot"  r="5" fill="#B5532A" stroke="#E6DDC8" stroke-width="1.5"/>
+          <text x="-52" y="3" class="delta-pin-label" font-family="JetBrains Mono, monospace" font-size="9" fill="#1A1410">KOLKATA</text>
+        </g>
+
+        <!-- Cox's Bazar (far SE) -->
+        <g class="delta-pin" data-target="scene-coxs-bazar" transform="translate(355,415)" tabindex="0" role="button" aria-label="Jump to Cox's Bazar, 1799 and 2017">
+          <circle class="delta-pin-glow" r="14" fill="#B5532A" opacity="0"/>
+          <circle class="delta-pin-dot"  r="5" fill="#B5532A" stroke="#E6DDC8" stroke-width="1.5"/>
+          <text x="-72" y="3" class="delta-pin-label" font-family="JetBrains Mono, monospace" font-size="9" fill="#1A1410">COX'S BAZAR</text>
+        </g>
+
+        <!-- Bay of Bengal label -->
+        <text x="200" y="490" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="9" fill="#5C4E3F" letter-spacing="3" opacity="0.7">BAY OF BENGAL</text>
+
+        <!-- Top corner labels -->
+        <g font-family="JetBrains Mono, monospace" font-size="10" fill="#5C4E3F" letter-spacing="2">
+          <text x="20" y="30">700 RIVERS · WORLD'S LARGEST DELTA</text>
+        </g>
+      </svg>
+
+      <!-- Slider control: drag from pre-1500 to post-1500 -->
+      <div class="delta-map-controls">
+        <div class="delta-map-slider-row">
+          <span class="delta-map-slider-label delta-map-slider-label-left">PRE-1500</span>
+          <input class="delta-map-slider" type="range" min="0" max="100" value="100"
+                 aria-label="Ganges channel: drag to see the 16th-century river shift">
+          <span class="delta-map-slider-label delta-map-slider-label-right">POST-1500</span>
+        </div>
+        <div class="delta-map-caption" data-delta-caption>
+          The Ganges flows east into the Padma. Modern Bengal.
+        </div>
+      </div>
+
+      <!-- Hover tooltip — populated by JS -->
+      <div class="delta-map-tooltip" data-delta-tooltip hidden></div>
+    </div>`;
+  },
+
   // The Biharis of Camp Geneva — tarpaulin tents, no flag
   'stranded-camp'() {
     return `<svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
@@ -1984,3 +2130,501 @@ class TOCController {
       .replace(/'/g, '&#39;');
   }
 }
+
+
+// ============================================================
+// 9. LIGHTBOX — click any photo in a media card to view large
+// ============================================================
+//
+// We delegate clicks from media-card images. The lightbox is a
+// single fixed-position overlay reused across all images. ESC,
+// backdrop-click, and the close button all dismiss it. Focus
+// returns to the originating image on close, for keyboard users.
+//
+class LightboxController {
+  constructor() {
+    this.root         = document.querySelector('.lightbox');
+    if (!this.root) return;
+    this.imgEl        = this.root.querySelector('.lightbox-image');
+    this.captionEl    = this.root.querySelector('.lightbox-caption');
+    this.creditEl     = this.root.querySelector('.lightbox-credit');
+    this.closeBtn     = this.root.querySelector('.lightbox-close');
+    this.isOpen       = false;
+    this.previousFocus = null;
+  }
+
+  init() {
+    if (!this.root) return;
+
+    // Delegate clicks on any media-card img — only real photos
+    // (not the embedded SVG fallbacks) will have an <img> tag.
+    document.addEventListener('click', e => {
+      const img = e.target.closest('.media-card img');
+      if (!img) return;
+      e.preventDefault();
+      this.openFromImg(img);
+    });
+
+    // Make images keyboard-activatable for a11y
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const focused = document.activeElement;
+        if (focused && focused.matches?.('.media-card img')) {
+          e.preventDefault();
+          this.openFromImg(focused);
+        }
+      }
+    });
+
+    // Close interactions
+    this.closeBtn?.addEventListener('click', () => this.close());
+    this.root.addEventListener('click', e => {
+      // Only close on backdrop clicks, not on image/caption clicks
+      if (e.target === this.root) this.close();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && this.isOpen) this.close();
+    });
+  }
+
+  openFromImg(img) {
+    if (!this.root) return;
+    // Pull caption + credit from sibling elements inside the same media-card
+    const card    = img.closest('.media-card');
+    const caption = card?.querySelector('.media-caption')?.textContent?.trim() || img.alt || '';
+    const credit  = card?.querySelector('.media-credit')?.textContent?.trim() || '';
+
+    this.imgEl.src           = img.currentSrc || img.src;
+    this.imgEl.alt           = img.alt || '';
+    this.captionEl.textContent = caption;
+    this.creditEl.textContent  = credit;
+    this.captionEl.style.display = caption ? '' : 'none';
+    this.creditEl.style.display  = credit ? '' : 'none';
+
+    this.previousFocus = document.activeElement;
+    this.root.setAttribute('aria-hidden', 'false');
+    this.root.classList.add('is-open');
+    document.body.classList.add('lightbox-open');
+    this.isOpen = true;
+    // Focus the close button so keyboard users can dismiss
+    setTimeout(() => this.closeBtn?.focus(), 50);
+  }
+
+  close() {
+    if (!this.root || !this.isOpen) return;
+    this.root.classList.remove('is-open');
+    this.root.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
+    this.isOpen = false;
+    // Clear src on close so we don't keep the large image in memory
+    setTimeout(() => {
+      if (!this.isOpen) this.imgEl.src = '';
+    }, 300);
+    // Restore focus to wherever the user came from
+    if (this.previousFocus && typeof this.previousFocus.focus === 'function') {
+      this.previousFocus.focus();
+    }
+  }
+}
+
+// Initialise lightbox after DOM is ready (alongside the other controllers)
+document.addEventListener('DOMContentLoaded', () => {
+  const lightbox = new LightboxController();
+  lightbox.init();
+});
+
+
+// ============================================================
+// 10. SEARCH — header search-bar with live dropdown
+// ============================================================
+//
+// The search expands from an icon into an input. As the user types,
+// we filter the TIMELINE array on title/subtitle/summary/dateDisplay,
+// rank matches, highlight the matched substring, and render a
+// dropdown of results showing year + title + subtitle.
+// Click or Enter on a result scrolls to that scene.
+//
+class SearchController {
+  constructor() {
+    this.wrap        = document.querySelector('.search-wrap');
+    if (!this.wrap) return;
+    this.toggleBtn   = this.wrap.querySelector('.search-toggle');
+    this.input       = this.wrap.querySelector('.search-input');
+    this.resultsEl   = this.wrap.querySelector('.search-results');
+    this.results     = [];           // current array of matches
+    this.activeIdx   = -1;           // for keyboard navigation
+    this.isOpen      = false;
+  }
+
+  init() {
+    if (!this.wrap) return;
+
+    // Toggle (acts as open OR close depending on state)
+    this.toggleBtn.addEventListener('click', () => {
+      this.isOpen ? this.close() : this.open();
+    });
+
+    // Live filter as the user types
+    this.input.addEventListener('input', () => this.update());
+
+    // Keyboard navigation inside the search
+    this.input.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        this.moveActive(1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        this.moveActive(-1);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (this.activeIdx >= 0 && this.results[this.activeIdx]) {
+          this.selectResult(this.results[this.activeIdx]);
+        } else if (this.results[0]) {
+          this.selectResult(this.results[0]);
+        }
+      } else if (e.key === 'Escape') {
+        this.close();
+      }
+    });
+
+    // Result-click delegation
+    this.resultsEl.addEventListener('click', e => {
+      const row = e.target.closest('[data-event-id]');
+      if (!row) return;
+      const ev = TIMELINE.find(t => t.id === row.dataset.eventId);
+      if (ev) this.selectResult(ev);
+    });
+
+    // Click outside closes the search
+    document.addEventListener('click', e => {
+      if (!this.isOpen) return;
+      if (this.wrap.contains(e.target)) return;
+      this.close();
+    });
+
+    // Keyboard shortcut: '/' to focus search (a la GitHub)
+    document.addEventListener('keydown', e => {
+      // Ignore when focus is in an input/textarea already
+      const tag = (document.activeElement?.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea') return;
+      if (e.key === '/') {
+        e.preventDefault();
+        this.open();
+      }
+    });
+  }
+
+  open() {
+    if (this.isOpen) return;
+    this.wrap.dataset.searchState = 'open';
+    this.toggleBtn.setAttribute('aria-label', 'Close search');
+    this.toggleBtn.setAttribute('aria-expanded', 'true');
+    this.isOpen = true;
+    // Focus the input after the CSS transition starts
+    setTimeout(() => this.input.focus(), 50);
+  }
+
+  close() {
+    if (!this.isOpen) return;
+    this.wrap.dataset.searchState = 'closed';
+    this.toggleBtn.setAttribute('aria-label', 'Search scenes');
+    this.toggleBtn.setAttribute('aria-expanded', 'false');
+    this.isOpen = false;
+    this.input.value = '';
+    this.hideResults();
+    this.toggleBtn.focus();
+  }
+
+  /**
+   * Live-filter the timeline against the current query and render
+   * the dropdown. We score matches so the most-relevant float up.
+   */
+  update() {
+    const q = this.input.value.trim().toLowerCase();
+    if (q.length < 1) {
+      this.hideResults();
+      return;
+    }
+
+    // Score every event. Higher score = better match.
+    // Title/subtitle hits weighted heaviest; summary/year as fallback.
+    const scored = TIMELINE.map(ev => {
+      const title    = (ev.title || '').toLowerCase();
+      const subtitle = (ev.subtitle || '').toLowerCase();
+      const summary  = (ev.summary || '').toLowerCase();
+      const dateStr  = (ev.dateDisplay || '').toLowerCase();
+      const yearStr  = String(ev.year);
+
+      let score = 0;
+      if (title.startsWith(q))      score += 100;
+      else if (title.includes(q))   score += 70;
+      if (subtitle.includes(q))     score += 40;
+      if (summary.includes(q))      score += 15;
+      if (dateStr.includes(q))      score += 25;
+      if (yearStr.includes(q))      score += 35;
+      // Body hits are weakest but still useful for content searches
+      if (Array.isArray(ev.body)) {
+        for (const para of ev.body) {
+          if (para.toLowerCase().includes(q)) { score += 8; break; }
+        }
+      }
+      return { ev, score };
+    }).filter(r => r.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 12);
+
+    this.results = scored.map(r => r.ev);
+    this.activeIdx = this.results.length > 0 ? 0 : -1;
+    this.renderResults(q);
+  }
+
+  /** Build the dropdown HTML for the current results array. */
+  renderResults(query) {
+    if (this.results.length === 0) {
+      this.resultsEl.innerHTML = `<div class="search-empty">No scenes match "${this.escape(query)}"</div>`;
+      this.resultsEl.hidden = false;
+      return;
+    }
+
+    const rows = this.results.map((ev, idx) => {
+      const year = this.escape(this.formatYear(ev.year, ev.dateDisplay));
+      const title = this.highlight(this.escape(ev.title || ''), query);
+      const sub   = this.escape(ev.subtitle || '');
+      const active = idx === this.activeIdx ? ' is-active' : '';
+      return `
+        <button class="search-result${active}" type="button" role="option" data-event-id="${this.escape(ev.id)}" data-idx="${idx}">
+          <span class="search-result-year">${year}</span>
+          <span class="search-result-text">
+            <span class="search-result-title">${title}</span>
+            ${sub ? `<span class="search-result-sub">${sub}</span>` : ''}
+          </span>
+        </button>
+      `;
+    }).join('');
+    this.resultsEl.innerHTML = rows;
+    this.resultsEl.hidden = false;
+  }
+
+  hideResults() {
+    this.resultsEl.hidden = true;
+    this.resultsEl.innerHTML = '';
+    this.results = [];
+    this.activeIdx = -1;
+  }
+
+  /** Move the keyboard-active result up or down. */
+  moveActive(delta) {
+    if (this.results.length === 0) return;
+    this.activeIdx = (this.activeIdx + delta + this.results.length) % this.results.length;
+    this.resultsEl.querySelectorAll('.search-result').forEach((el, i) => {
+      el.classList.toggle('is-active', i === this.activeIdx);
+      if (i === this.activeIdx) el.scrollIntoView({ block: 'nearest' });
+    });
+  }
+
+  /** Navigate to the scene and close the search. */
+  selectResult(ev) {
+    const targetId = `scene-${ev.id}`;
+    const target = document.getElementById(targetId);
+    if (target) {
+      const topBarOffset = 72;
+      const rect = target.getBoundingClientRect();
+      const y = window.scrollY + rect.top - topBarOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    this.close();
+  }
+
+  /** Highlight the query substring inside a title (already escaped). */
+  highlight(text, query) {
+    if (!query) return text;
+    const qEsc = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(`(${qEsc})`, 'ig');
+    return text.replace(re, '<em>$1</em>');
+  }
+
+  /** Same year-formatting heuristic the TOC uses (kept local for independence). */
+  formatYear(year, dateDisplay) {
+    if (typeof year !== 'number') return dateDisplay || '';
+    if (year < 0) return `${Math.abs(year)} BCE`;
+    return String(year);
+  }
+
+  escape(s) {
+    return String(s ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const search = new SearchController();
+  search.init();
+});
+
+
+// ============================================================
+// 11. DELTA MAP — interactive river/city map (replaces delta-rivers
+//     motif on the opening scene)
+// ============================================================
+//
+// The motif renders an SVG with two reference paths (#ganges-path-pre,
+// #ganges-path-post) and a visible path (#ganges-channel). The
+// slider value 0..100 linearly interpolates between the two by
+// parsing each path's `d` numbers and lerping pairwise.
+//
+class DeltaMapController {
+  constructor(root) {
+    this.root      = root;                                          // .delta-map element
+    this.slider    = root.querySelector('.delta-map-slider');
+    this.caption   = root.querySelector('[data-delta-caption]');
+    this.tooltip   = root.querySelector('[data-delta-tooltip]');
+    this.channel   = root.querySelector('#ganges-channel');
+    this.gangesLbl = root.querySelector('#ganges-label');
+    this.padmaLbl  = root.querySelector('#padma-label');
+    this.pathPre   = root.querySelector('#ganges-path-pre')?.getAttribute('d');
+    this.pathPost  = root.querySelector('#ganges-path-post')?.getAttribute('d');
+    this.pins      = root.querySelectorAll('.delta-pin');
+    this.svg       = root.querySelector('.delta-map-svg');
+
+    // City metadata for the tooltip — keyed by scene id
+    this.cityInfo = {
+      'scene-mahasthangarh':       { title: 'Mahasthangarh',   sub: 'c. 300 BCE · oldest city, Mauryan capital' },
+      'scene-bengal-sultanate':    { title: 'Gaur',             sub: '1342 – 1576 · Bengal Sultanate capital'    },
+      'scene-nawabs-murshidabad':  { title: 'Murshidabad',     sub: '1717 – 1757 · Nawab capital'                },
+      'scene-mughal-islamization': { title: 'Dhaka',            sub: 'founded 1610 by Islam Khan Chishti'         },
+      'scene-renaissance':         { title: 'Kolkata',          sub: '19th c. · Bengal Renaissance, British India'},
+      'scene-coxs-bazar':          { title: 'Cox\'s Bazar',     sub: '1799 / 2017 · twice a refuge'               }
+    };
+  }
+
+  init() {
+    if (!this.root || !this.slider || !this.pathPre || !this.pathPost) return;
+
+    // Slider drives the channel morph
+    this.slider.addEventListener('input', () => this.updateChannel());
+
+    // Pin interactions: hover for tooltip, click to navigate, keyboard support
+    this.pins.forEach(pin => {
+      pin.addEventListener('mouseenter', e => this.showTooltip(pin));
+      pin.addEventListener('mousemove',  e => this.positionTooltip(e));
+      pin.addEventListener('mouseleave', ()  => this.hideTooltip());
+      pin.addEventListener('focus',      ()  => this.showTooltip(pin));
+      pin.addEventListener('blur',       ()  => this.hideTooltip());
+      pin.addEventListener('click',      ()  => this.navigate(pin));
+      pin.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.navigate(pin);
+        }
+      });
+    });
+
+    // Initial render
+    this.updateChannel();
+  }
+
+  /**
+   * Parse the two reference d-strings as arrays of numbers,
+   * linearly interpolate by slider position, and write back
+   * to the visible channel.
+   */
+  updateChannel() {
+    const t = Number(this.slider.value) / 100;     // 0 = pre-1500, 1 = post-1500
+    const a = this._parseD(this.pathPre);
+    const b = this._parseD(this.pathPost);
+    if (a.commands.length !== b.commands.length) return;
+
+    // Lerp numbers pairwise, keep command letters
+    const out = a.commands.map((cmd, i) => {
+      const aNums = cmd.nums, bNums = b.commands[i].nums;
+      const lerped = aNums.map((n, k) => n + (bNums[k] - n) * t);
+      return cmd.letter + ' ' + lerped.map(n => n.toFixed(1)).join(' ');
+    }).join(' ');
+    this.channel.setAttribute('d', out);
+
+    // Caption + label fade based on slider
+    if (t < 0.4) {
+      this.caption.textContent = 'The Ganges flows south through the Hooghly. The eastern delta is half-empty marsh.';
+      this.gangesLbl.style.opacity = '0.9';
+      this.padmaLbl.style.opacity  = '0.2';
+    } else if (t > 0.6) {
+      this.caption.textContent = 'The Ganges flows east into the Padma. Modern Bengal.';
+      this.gangesLbl.style.opacity = '0.45';
+      this.padmaLbl.style.opacity  = '0.9';
+    } else {
+      this.caption.textContent = 'The 16th-century river shift, in progress.';
+      this.gangesLbl.style.opacity = '0.65';
+      this.padmaLbl.style.opacity  = '0.55';
+    }
+  }
+
+  /** Parse SVG path d attribute into {commands: [{letter, nums:[…]}]}. */
+  _parseD(d) {
+    const tokens = d.match(/[A-Za-z]|-?\d+(?:\.\d+)?/g) || [];
+    const commands = [];
+    let curr = null;
+    for (const tok of tokens) {
+      if (/[A-Za-z]/.test(tok)) {
+        if (curr) commands.push(curr);
+        curr = { letter: tok, nums: [] };
+      } else if (curr) {
+        curr.nums.push(parseFloat(tok));
+      }
+    }
+    if (curr) commands.push(curr);
+    return { commands };
+  }
+
+  showTooltip(pin) {
+    const info = this.cityInfo[pin.dataset.target];
+    if (!info || !this.tooltip) return;
+    this.tooltip.innerHTML = `
+      <div class="delta-tip-title">${info.title}</div>
+      <div class="delta-tip-sub">${info.sub}</div>
+      <div class="delta-tip-hint">Click to jump →</div>
+    `;
+    this.tooltip.hidden = false;
+    // Position near pin by default
+    const bbox = pin.getBoundingClientRect();
+    const rootBox = this.root.getBoundingClientRect();
+    this.tooltip.style.left = (bbox.left - rootBox.left + bbox.width / 2) + 'px';
+    this.tooltip.style.top  = (bbox.top  - rootBox.top  - 8) + 'px';
+  }
+
+  positionTooltip(e) {
+    if (!this.tooltip || this.tooltip.hidden) return;
+    const rootBox = this.root.getBoundingClientRect();
+    this.tooltip.style.left = (e.clientX - rootBox.left) + 'px';
+    this.tooltip.style.top  = (e.clientY - rootBox.top - 8) + 'px';
+  }
+
+  hideTooltip() {
+    if (this.tooltip) this.tooltip.hidden = true;
+  }
+
+  navigate(pin) {
+    const targetId = pin.dataset.target;
+    if (!targetId) return;
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    const topBarOffset = 72;
+    const rect = target.getBoundingClientRect();
+    const y = window.scrollY + rect.top - topBarOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
+
+// Initialise after timeline render — find any delta maps on the page and wire them up
+document.addEventListener('DOMContentLoaded', () => {
+  // Slight delay so the timeline scenes are rendered before we
+  // try to find the .delta-map element.
+  setTimeout(() => {
+    document.querySelectorAll('[data-delta-map]').forEach(root => {
+      new DeltaMapController(root).init();
+    });
+  }, 100);
+});

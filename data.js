@@ -72,11 +72,8 @@ const TIMELINE = [
       enclavesSwapped: '162 (2015)'
     },
     media: [{
-      type: 'photo',
-      motif: 'delta-rivers',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ganges%20River%20Delta%2C%20Bangladesh%2C%20India.jpg?width=800',
-      caption: 'Ganges-Brahmaputra Delta from orbit',
-      credit: 'NASA / Public Domain'
+      type: 'pattern',
+      motif: 'delta-rivers-interactive'
     }],
     sources: ['Bangladesh Water Development Board', 'India-Bangladesh Land Boundary Agreement 2015']
   }),
