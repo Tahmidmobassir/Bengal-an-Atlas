@@ -1304,7 +1304,7 @@ body.track-filter-west-bengal  .scene[data-track="bangladesh"]   { opacity: 0.2;
   font-size: 0.62rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--fg-mute);
+  color: var(--fg-soft);
   background: var(--bg);
   transition: background-color 0.45s var(--ease-out), color 0.45s var(--ease-out);
 }
@@ -1312,7 +1312,15 @@ body.track-filter-west-bengal  .scene[data-track="bangladesh"]   { opacity: 0.2;
   max-width: 28rem;
   margin: 0 auto;
   padding-top: 0.6rem;
-  border-top: 1px solid var(--hairline);
+  border-top: 1px solid var(--hairline-2);
+}
+
+/* In dark mode, lift the footer further so it's clearly readable */
+:root[data-theme="dark"] .site-footer {
+  color: #D8D2C2;
+}
+:root[data-theme="dark"] .site-footer-inner {
+  border-top-color: rgba(232, 228, 216, 0.22);
 }
 
 /* ============================================================

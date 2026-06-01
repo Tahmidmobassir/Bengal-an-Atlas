@@ -81,29 +81,44 @@ const TIMELINE = [
   new TimelineEvent({
     id: 'chalcolithic',
     order: 1,
-    year: -1600,
-    dateDisplay: 'c. 1600 – 1400 BCE',
-    title: 'The First Bengalis',
-    subtitle: 'Pandu Rajar Dhibi & Chalcolithic Bengal',
+    year: -10000,
+    dateDisplay: 'c. 10,000 – 1500 BC',
+    title: 'Who Walked Here First',
+    subtitle: 'The peopling of the delta',
     track: 'shared',
     era: 'origins',
-    summary: 'On a mound by the Ajay river, the earliest Bengalis fired pottery, smelted copper, and traded with the Aegean.',
+    summary: 'The Bengali people are an alluvial deposit. They are made of at least four streams of human migration, separated by thousands of years and thousands of kilometres, all of which arrived at the same delta because the delta was where the rice grew.',
     body: [
-      'Long before "Bengal" had a name, farmers settled on the alluvial banks of the Ajay river in what is now Purba Bardhaman. Excavated between 1962 and 1965 by P.C. Dasgupta, the Chalcolithic site at Pandu Rajar Dhibi yielded copper tools, painted pottery, and beads, possibly through trade with the Aegean.',
-      'These were rice farmers in well-planned settlements. They wore cotton, the earliest cotton textile tradition in South Asia after the Indus Valley. They worshipped a mother goddess. They built towns at a scale that suggests organization beyond the household. They are the substrate beneath everything that comes next.'
+      'The oldest hard archaeological evidence for humans on this soil is a scatter of small stone tools on the banks of the Damodar river, in a place called Birbhanpur, near the modern town of Durgapur. Excavated by the archaeologist B. B. Lal between 1954 and 1957, the site yielded thousands of microliths — flakes, blades, scrapers and lunates worked from quartz, rock crystal and chalcedony, some of them from fossilised wood — alongside post-holes that may once have anchored huts. The toolkit is mesolithic, roughly ten thousand to four thousand years old, and the people who made it were hunter-gatherers who fished the river, hunted the deer and wild pig of the surrounding sal forest, and left no name and no language we can read. Genetic studies place them in the lineage now called Ancient Ancestral South Indian, the deep substrate of the entire subcontinent, descended from the wave of modern humans that walked out of Africa some sixty-five thousand years ago and reached South Asia by following the coast. The same lineage is carried today by the Andamanese Islanders and the tribal peoples of central and southern India. Some thread of it runs in every Bengali alive.',
+      'The first migration that changed the delta arrived from the east. Sometime between three and four thousand years ago, Austroasiatic-speaking peoples moved into eastern India from mainland Southeast Asia, probably down the Brahmaputra corridor, bringing with them the single most consequential introduction in Bengal\'s history: wet-rice cultivation. They were the ancestors of today\'s Munda peoples — the Santhals, Mundas, Kharias and Hos of the Chhotanagpur plateau and the Bengal hinterland — and the cousins of the Mon-Khmer-speaking populations of Cambodia, Laos and Vietnam. Without them there is no agrarian Bengal. The Bengali word for rice itself, dhan, sits inside an older Austroasiatic family of rice-words that runs east into Southeast Asia. Bengalis carry significantly more East and Southeast Asian ancestry than any other population in mainland South Asia, and this is where it comes from. Dravidian-speaking populations were sharing the region in the same period, contributing the second substrate.',
+      'The third stream arrived from the opposite direction. Indo-Aryan-speaking groups began moving down the Gangetic plain from the northwest from about 1500 BC onward, bringing the Sanskrit-derived language family that would, after a thousand years of mixing with the Austroasiatic and Dravidian populations already there, become Bangla. The earliest Vedic texts knew the eastern delta as Vanga, and the Aryan compilers treated it as outside the civilised pale, a wet forested country of unruly peoples. Vanga eventually became Vangaal, then Bangla, then Bengal. From the north and east a fourth stream came down out of the hills: Tibeto-Burman speakers from the Brahmaputra valley and the eastern Himalayas, whose genetic and linguistic traces still concentrate in the Rajbanshi and Koch communities of northern Bengal. Later still, as the timeline ahead will record, came the Persians, Arabs, Turks, and Central Asians of the medieval Muslim centuries. Every wave folded into the previous one. None replaced the people already there. The Bengali genome is one of the most layered in South Asia.',
+      'The chalcolithic settlement at Pandu Rajar Dhibi, on a mound by the Ajay river in what is now Purba Bardhaman, was excavated by P. C. Dasgupta between 1962 and 1985. It dates to around 1600 BC — late in this peopling story, not early — and gives us the best single window into what life looked like by the time the migrations had settled into farming villages. The people of Pandu Rajar Dhibi grew rice and pulses, smelted copper into rings and fish hooks and needles, fired black-and-red ware pottery, traded for lapis lazuli from somewhere far to the west, and may even have had contact with the Aegean. They built in mud and reed. They buried their dead with grave goods. They are not the first Bengalis in any meaningful sense — millennia of older inhabitants stand behind them — but they are the first whose lives we can reconstruct in detail. The structural fact of Bengal\'s population, then and now, is this: wet-rice agriculture, introduced by the Austroasiatic stream and refined over three millennia, let the delta carry a density of people no other Indian region could match. By 1700, Bengal would feed sixty million on the same soil where, in the time of Birbhanpur, a few thousand had hunted along the riverbanks. The rivers wrote the geography. The rice wrote the demography. The migrations wrote the people.'
     ],
-    quote: 'Possible contacts with the Aegaean coasts.',
-    quoteAuthor: 'Banglapedia',
-    metrics: { population: '~50,000', technology: 'Bronze Age', script: 'None yet' },
+    quote: 'Bengal is a fertile delta at the crossroads of South and Southeast Asia. It has always been a melting pot.',
+    quoteAuthor: 'The contemporary historical consensus on the origins of the Bengali people',
+    metrics: {
+      oldestEvidence: 'Birbhanpur · c. 10,000 BC',
+      austroasiaticArrival: 'c. 2000–1500 BC · from Southeast Asia',
+      indoAryanArrival: 'c. 1500 BC onward · from the northwest',
+      panduRajarDhibi: 'c. 1600 BC · type-site of chalcolithic Bengal',
+      modernSubstrate: 'AASI · Austroasiatic · Dravidian · Indo-Aryan · Tibeto-Burman'
+    },
     media: [{ type: 'pattern', motif: 'terracotta-pottery' }],
-    sources: ['Banglapedia: Pandu Rajar Dhibi', 'Dasgupta excavations 1962–65']
+    sources: [
+      'B. B. Lal, "Birbhanpur: A Microlithic Site in the Damodar Valley, West Bengal", Ancient India 14 (1958)',
+      'Banglapedia: Birbhanpur',
+      'Banglapedia: Pandu Rajar Dhibi',
+      'P. C. Dasgupta excavations at Pandu Rajar Dhibi, 1962–65',
+      'David Reich et al., Who We Are and How We Got Here: Ancient DNA and the New Science of the Human Past (2018)',
+      'Vagheesh Narasimhan et al., "The formation of human populations in South and Central Asia", Science 365 (2019)'
+    ]
   }),
 
   new TimelineEvent({
     id: 'gangaridai',
     order: 2,
     year: -326,
-    dateDisplay: 'c. 326 BCE',
+    dateDisplay: 'c. 326 BC',
     title: 'The Elephants of Gangaridai',
     subtitle: 'Alexander turns back',
     track: 'shared',
@@ -115,7 +130,7 @@ const TIMELINE = [
     ],
     quote: 'Even Alexander refrained from making war upon the Gandaridae alone of all peoples.',
     quoteAuthor: 'Diodorus Siculus, Library of History',
-    metrics: { warElephants: '4,000', alexander: 'turned back', firstMention: '326 BCE' },
+    metrics: { warElephants: '4,000', alexander: 'turned back', firstMention: '326 BC' },
     media: [{
       type: 'photo',
       motif: 'elephant-frieze',
@@ -130,26 +145,26 @@ const TIMELINE = [
     id: 'mahasthangarh',
     order: 3,
     year: -300,
-    dateDisplay: '3rd century BCE – 12th century CE',
+    dateDisplay: '3rd century BC – 12th century AD',
     title: 'Pundranagara',
     subtitle: 'The oldest city',
     track: 'shared',
     era: 'origins',
     summary: 'On the bank of the Karatoya river in what is now Bogra, a Mauryan administrator left a six-line stone inscription ordering grain be distributed to a famine-struck province. It is the oldest surviving written document from Bangladesh, and the city that produced it kept being a city for fifteen centuries.',
     body: [
-      'Mahasthangarh sits thirteen kilometres north of Bogra town in northern Bangladesh, on the western bank of the Karatoya, a river that in the 3rd century BCE was a main channel of the Brahmaputra and is now a thin stream. The citadel is an oblong plateau, fifteen hundred metres long north to south and fourteen hundred east to west, ringed by rampart walls of burnished brick that still rise six metres above the surrounding paddy. The bricks date from the Mauryan period. The walls have outlasted every empire that built on top of them. The city was sited where it was for two reasons, both practical: the Karatoya defended it on the east and deep moats on the other three sides did the rest, and the plateau itself is one of the few stretches of natural high ground in a country most of which lies under ten metres above the sea.',
-      'In 1931, archaeologists from the colonial Archaeological Survey of India recovered a small limestone slab inscribed with six lines in Prakrit, written in early Brahmi script. The dialect and lettering date it to the 3rd century BCE, the reign of Ashoka. It is the oldest written document found in what is today Bangladesh. The text records an administrative order: a mahamatra, a senior royal officer posted to the prosperous city of Pudanagala (Pundranagara), is told to release sesame and mustard seeds from the royal stores and distribute them among the samvargikas, presumably an administrative caste, who have been struck by famine. The crops were to be stored back in the granary in the fortified area when the harvest recovered. The first recorded act of governance on Bengali soil is a government deciding which of its citizens get fed in a bad year.',
-      'Pundranagara was the capital of Pundravardhana, the territory of the ancient Pundra people whose name was old enough to appear in the Mahabharata as one of the kingdoms that fought on the Kaurava side at Kurukshetra. The city served as a provincial capital under the Mauryans, the Guptas, the Palas, and the Senas, in continuous administrative use for roughly fifteen hundred years from the 4th century BCE to the 12th century CE. The Chinese Buddhist pilgrim Xuanzang visited in the 640s and counted twenty Buddhist monasteries and three thousand monks in residence. Kautilya\'s Arthashastra, written before the city even existed in its Mauryan form, already mentions Paundrika patrorna, a fine silk from Pundra, and dukula, the fine cotton that would later become the muslin of Dhaka. Long-distance trade ran south through the river to the Bay of Bengal and onward; another road ran west to Pataliputra, the Mauryan capital. Inside the rampart and scattered through the villages around it, named mounds still mark the buried city: Govinda Bhita to the north, a Vishnu temple over an older Buddhist platform; Bairagir Bhita, two Gupta-period brick temples uncovered in the first dig; Mankalir Kund, a sacred tank; Khodar Pathar Bhita, "the stone-of-God platform"; the gigantic terraced stupa plinth Nani Gopal Majumdar exposed in 1934–36; and three kilometres east of the citadel, the legendary Lakshindar-er Medh, "Lakshindar\'s Mound," which Bengali folklore names as the iron-walled wedding chamber of the goddess Manasa\'s curse in the Behula-Lakhinder story.',
-      'The site was forgotten for most of the second millennium. Local memory replaced history with legend: in the early 13th century the Sufi saint Shah Sultan Mahisawar, popularly called Balkhi, was said to have crossed the Karatoya on a giant fish-shaped boat and converted the last Hindu king of Mahasthan, the tyrant Parashuram. The saint\'s mazar still occupies the southeast corner of the citadel, alongside a Mughal mosque built under Farrukhsiyar in the early 18th century. The ruins were identified as the long-lost Pundranagara by Sir Alexander Cunningham in 1879 on the basis of Xuanzang\'s description. First excavation came in 1928–29 under K. N. Dikshit, who dug Bairagir Bhita, Govinda Bhita, and the bastion at Munir Ghon. Majumdar followed in 1934–36 with the stupa. Then nothing serious for fifty years. In 1993 a joint Bangladesh-France archaeological mission under Shafiqul Alam and Jean-François Salles began the first stratified excavation of the eastern rampart, peeling back eleven distinct occupation levels from the 4th century BCE through the medieval period, dated by charcoal radiocarbon. SAARC declared Mahasthangarh the Cultural Capital of South Asia in 2016. Less than a tenth of the citadel has ever been dug. Most of the oldest city in Bangladesh is still under the grass.'
+      'Mahasthangarh sits thirteen kilometres north of Bogra town in northern Bangladesh, on the western bank of the Karatoya, a river that in the 3rd century BC was a main channel of the Brahmaputra and is now a thin stream. The citadel is an oblong plateau, fifteen hundred metres long north to south and fourteen hundred east to west, ringed by rampart walls of burnished brick that still rise six metres above the surrounding paddy. The bricks date from the Mauryan period. The walls have outlasted every empire that built on top of them. The city was sited where it was for two reasons, both practical: the Karatoya defended it on the east and deep moats on the other three sides did the rest, and the plateau itself is one of the few stretches of natural high ground in a country most of which lies under ten metres above the sea. This is the oldest urban site in Bengal, but not in South Asia: the Harappan cities of the Indus Valley, fifteen hundred kilometres to the west, had risen, peaked, and collapsed a thousand years before the first Mauryan brick was laid here. Bengal\'s urban history begins late, and begins on its own rivers.',
+      'In 1931, archaeologists from the colonial Archaeological Survey of India recovered a small limestone slab inscribed with six lines in Prakrit, written in early Brahmi script. The dialect and lettering date it to the 3rd century BC, the reign of Ashoka. It is the oldest written document found in what is today Bangladesh. The text records an administrative order: a mahamatra, a senior royal officer posted to the prosperous city of Pudanagala (Pundranagara), is told to release sesame and mustard seeds from the royal stores and distribute them among the samvargikas, presumably an administrative caste, who have been struck by famine. The crops were to be stored back in the granary in the fortified area when the harvest recovered. The first recorded act of governance on Bengali soil is a government deciding which of its citizens get fed in a bad year.',
+      'Pundranagara was the capital of Pundravardhana, the territory of the ancient Pundra people whose name was old enough to appear in the Mahabharata as one of the kingdoms that fought on the Kaurava side at Kurukshetra. The city served as a provincial capital under the Mauryans, the Guptas, the Palas, and the Senas, in continuous administrative use for roughly fifteen hundred years from the 4th century BC to the 12th century AD. The Chinese Buddhist pilgrim Xuanzang visited in the 640s and counted twenty Buddhist monasteries and three thousand monks in residence. Kautilya\'s Arthashastra, written before the city even existed in its Mauryan form, already mentions Paundrika patrorna, a fine silk from Pundra, and dukula, the fine cotton that would later become the muslin of Dhaka. Long-distance trade ran south through the river to the Bay of Bengal and onward; another road ran west to Pataliputra, the Mauryan capital. Inside the rampart and scattered through the villages around it, named mounds still mark the buried city: Govinda Bhita to the north, a Vishnu temple over an older Buddhist platform; Bairagir Bhita, two Gupta-period brick temples uncovered in the first dig; Mankalir Kund, a sacred tank; Khodar Pathar Bhita, "the stone-of-God platform"; the gigantic terraced stupa plinth Nani Gopal Majumdar exposed in 1934–36; and three kilometres east of the citadel, the legendary Lakshindar-er Medh, "Lakshindar\'s Mound," which Bengali folklore names as the iron-walled wedding chamber of the goddess Manasa\'s curse in the Behula-Lakhinder story.',
+      'The site was forgotten for most of the second millennium. Local memory replaced history with legend: in the early 13th century the Sufi saint Shah Sultan Mahisawar, popularly called Balkhi, was said to have crossed the Karatoya on a giant fish-shaped boat and converted the last Hindu king of Mahasthan, the tyrant Parashuram. The saint\'s mazar still occupies the southeast corner of the citadel, alongside a Mughal mosque built under Farrukhsiyar in the early 18th century. The ruins were identified as the long-lost Pundranagara by Sir Alexander Cunningham in 1879 on the basis of Xuanzang\'s description. First excavation came in 1928–29 under K. N. Dikshit, who dug Bairagir Bhita, Govinda Bhita, and the bastion at Munir Ghon. Majumdar followed in 1934–36 with the stupa. Then nothing serious for fifty years. In 1993 a joint Bangladesh-France archaeological mission under Shafiqul Alam and Jean-François Salles began the first stratified excavation of the eastern rampart, peeling back eleven distinct occupation levels from the 4th century BC through the medieval period, dated by charcoal radiocarbon. SAARC declared Mahasthangarh the Cultural Capital of South Asia in 2016. Less than a tenth of the citadel has ever been dug. Most of the oldest city in Bangladesh is still under the grass.'
     ],
     quote: 'Sesame and mustard seeds from the royal granary, to be distributed among those struck by the famine.',
-    quoteAuthor: 'The Mahasthan Brahmi Inscription, c. 3rd century BCE',
+    quoteAuthor: 'The Mahasthan Brahmi Inscription, c. 3rd century BC',
     metrics: {
       citadel: '1,500m × 1,400m',
       rampartHeight: '~6m',
-      occupied: 'c. 4th c. BCE → 12th c. CE',
+      occupied: 'c. 4th c. BC → 12th c. AD',
       oldestWriting: 'Mahasthan Brahmi Inscription, 1931 discovery',
-      monasteries: '20 (per Xuanzang, 640s CE)',
+      monasteries: '20 (per Xuanzang, 640s AD)',
       excavationLevels: '11 (1993–99 France–Bangladesh)',
       excavated: '<10% of citadel',
       saarcCapital: '2016'
@@ -168,15 +183,15 @@ const TIMELINE = [
     id: 'pala-empire',
     order: 4,
     year: 750,
-    dateDisplay: '750 – 1161 CE',
+    dateDisplay: '750 – 1161 AD',
     title: 'The Pala Buddhist Golden Age',
     subtitle: 'When Bengal taught the world',
     track: 'shared',
     era: 'medieval',
     summary: 'Gopala was elected by the people to end an age of anarchy. His dynasty built the universities that would carry Buddhism to Tibet.',
     body: [
-      'After centuries of warlordism the chiefs of Gauda did something almost unique in early medieval South Asia: they elected a king. Gopala, a warrior of humble origin, was chosen around 750 CE to end the matsyanyaya, the rule of the fish, where the strong devour the weak. His dynasty would last four hundred years.',
-      'Under Dharmapala and Devapala the Pala Empire became the dominant power of northern India. They built four great Buddhist universities (Vikramashila, Odantapuri, Jagaddala, and Somapura Mahavihara) and lavished patronage on Nalanda. The Pala monk Atisha Dipankara walked to Tibet in 1042 CE and refounded Tibetan Buddhism. The Pala bronze style was copied from Java to Yunnan.',
+      'After centuries of warlordism the chiefs of Gauda did something almost unique in early medieval South Asia: they elected a king. Gopala, a warrior of humble origin, was chosen around 750 AD to end the matsyanyaya, the rule of the fish, where the strong devour the weak. His dynasty would last four hundred years.',
+      'Under Dharmapala and Devapala the Pala Empire became the dominant power of northern India. They built four great Buddhist universities (Vikramashila, Odantapuri, Jagaddala, and Somapura Mahavihara) and lavished patronage on Nalanda. The Pala monk Atisha Dipankara walked to Tibet in 1042 AD and refounded Tibetan Buddhism. The Pala bronze style was copied from Java to Yunnan.',
       'Somapura Mahavihara, in Paharpur, Bangladesh, a 21-acre brick complex with 177 monastic cells, survives as a UNESCO World Heritage Site. Visit it and you understand: this was once the largest Buddhist monastery south of the Himalayas.'
     ],
     quote: 'The matsyanyaya, where the strong devour the weak, was ended by the people\'s choice.',
@@ -196,7 +211,7 @@ const TIMELINE = [
     id: 'bakhtiyar',
     order: 5,
     year: 1204,
-    dateDisplay: '1204 CE',
+    dateDisplay: '1204 AD',
     title: 'Eighteen Horsemen',
     subtitle: 'Bakhtiyar Khalji and the end of Hindu Bengal',
     track: 'shared',
@@ -256,7 +271,7 @@ const TIMELINE = [
     body: [
       'Akbar annexed Bengal in 1576. For the first decades the subah was unruly: the Bengal subahdar Islam Khan Chishti finally pacified the eastern delta in 1610 by moving the capital from Rajmahal to a small fortified post on the Buriganga he renamed Jahangirnagar, after the Mughal emperor. Today we call it Dhaka. Under Shaista Khan, who governed twice (1664–1678 and 1680–1688), the city reached perhaps a million people, expelled the Portuguese pirates of Chittagong, drove out the Arakanese slave-raiders of the southeast, and built the Lalbagh Fort his daughter Pari Bibi would never finish living in. By 1700 the subah of Bengal produced twelve percent of global GDP and Aurangzeb called it "the paradise of nations."',
       'But the real revolution was geographic. Sometime in the 16th century the main channel of the Ganges shifted eastward into the Padma, opening the dense eastern delta to cultivation. Mughal officials issued tax-free taluq grants to charismatic Sufi pioneers, the pirs, who recruited indigenous forest-dwellers, cleared mangrove and sal forest, and built mosques as the new villages\' nucleus. The mosques doubled as schools, courts, granaries and meeting halls — the only stone-and-brick institution most of the village would see.',
-      'Up to this point Islam in Bengal had been mostly a town religion. From the Khalji conquest onward it had been the faith of the court and the cantonment: of nobles, qazis, judges, soldiers and madrasa scholars who often claimed Arab or Persian descent and looked outward to the Islamic centres of the wider world. What happened on the agrarian frontier was structurally different. Mughal-era mass paper production, cheap by previous standards, made it possible for the first time for the Quran and devotional poetry in Bengali to circulate as written objects rather than the property of memorisers. Islam moved from an oral, urban, foreign-claiming tradition into a written, rural, locally-rooted one. Over generations, Buddhists, low-caste Hindus, and animist forest peoples folded into this new agrarian Islamic core. There is no moment of conversion to point to. Today in the Sundarbans, the forest goddess Bonbibi is worshipped by Hindus and Muslims together. The Sufi tomb of Shah Jalal in Sylhet is a holy site to all faiths. This is the academic consensus, the historian Richard Eaton\'s thesis: Bengal\'s Islamization was an agrarian frontier process, not a conquest.'
+      'Up to this point Islam in Bengal had been mostly a town religion. From the Khalji conquest onward it had been the faith of the court and the cantonment: of nobles, qazis, judges, soldiers and madrasa scholars who often claimed Arab or Persian descent and looked outward to the Islamic centres of the wider world. Five hundred years of Persianate administration left its deepest mark not on the religion but on the language. Modern Bangla absorbed roughly ten thousand Persian, Arabic and Turkic loanwords; about a quarter of the everyday vocabulary is foreign in origin. The lexicon itself is a record of who ruled. What happened on the agrarian frontier, meanwhile, was structurally different. Mughal-era mass paper production, cheap by previous standards, made it possible for the first time for the Quran and devotional poetry in Bengali to circulate as written objects rather than the property of memorisers. Islam moved from an oral, urban, foreign-claiming tradition into a written, rural, locally-rooted one. Over generations, Buddhists, low-caste Hindus, and animist forest peoples folded into this new agrarian Islamic core. There is no moment of conversion to point to. Today in the Sundarbans, the forest goddess Bonbibi is worshipped by Hindus and Muslims together. The Sufi tomb of Shah Jalal in Sylhet is a holy site to all faiths. This is the academic consensus, the historian Richard Eaton\'s thesis: Bengal\'s Islamization was an agrarian frontier process, not a conquest.'
     ],
     quote: 'The paradise of nations.',
     quoteAuthor: 'Emperor Aurangzeb, on Bengal',
@@ -382,6 +397,40 @@ const TIMELINE = [
     metrics: { famineDeaths: '1.2M – 10M', britainExtracted: '$45 trillion (1765–1938)', muslinIndustry: 'Destroyed' },
     media: [{ type: 'pattern', motif: 'indigo-revolt' }],
     sources: ['Utsa Patnaik, Agrarian and Other Histories', 'Madhusree Mukerjee, Churchill\'s Secret War']
+  }),
+
+  new TimelineEvent({
+    id: 'coxs-bazar',
+    order: 9.5,
+    year: 1799,
+    dateDisplay: '1798 – 1799',
+    title: 'Cox\'s Bazar',
+    subtitle: 'A British captain dies running a refugee camp; the town keeps his name',
+    track: 'shared',
+    era: 'colonial',
+    summary: 'In 1784 the Burmese army destroyed the Arakanese kingdom of Mrauk U and pushed roughly fifty thousand Buddhist Rakhine families across the Naf River into Company-controlled Bengal. The East India Company sent an obscure captain to settle them in a fishing outpost on the coast. He died a year later. They named the market for him. It is still there.',
+    body: [
+      'For three and a half centuries the kingdom of Mrauk U on the eastern shore of the Bay of Bengal had been one of the great trading states of the region. Its kings spoke Arakanese, patronised Buddhism, employed Bengali Muslim court officials, and minted coins with Persian script on one side and Burmese on the other. The kingdom traded with the Mughals, with Portuguese pirates, with the Dutch East India Company. Then in 1784 the Konbaung dynasty of Burma, expansionist and centralising, marched across the Arakan Yoma mountains and ended it. The capital fell. The Mahamuni Buddha, Mrauk U\'s holiest image, cast in the 2nd century, was carried back to Mandalay where it still sits in the Mahamuni temple, gold leaf flaking off every year by the kilo. Tens of thousands of Arakanese Buddhists fled north along the coast, crossing the Naf River into Bengal.',
+      'Captain Hiram Cox was a thirty-eight-year-old officer of the East India Company who had served as Resident at the Konbaung court in Amarapura between 1796 and 1798 and had been recalled in some disgrace after a diplomatic row with the Burmese king. The Company, not quite knowing what to do with him next, gave him an unglamorous posting: superintend the resettlement of the Arakanese refugees camped in tents at a coastal fishing village called Palongkee, then sometimes Panowa, on the southeastern frontier of the Chittagong district. He arrived in late 1798 with orders to clear land, dig wells, and apportion plots. Within a year he was dead, probably of fever, on the job. The Company\'s gazette reported his death in a single line. To mark the work he had managed to finish, his colleagues named the local market Cox\'s Bazar. About forty to fifty thousand Arakanese had been resettled by then. Their descendants today are the Rakhine people of Bangladesh, still Buddhist, still speaking Arakanese, concentrated in Cox\'s Bazar and the surrounding hill tracts.',
+      'The town that took his name grew up around the bazar. By the late twentieth century it had become Bangladesh\'s premier seaside destination, fronting onto what tourist boards claim is the world\'s longest unbroken natural beach: a hundred and twenty-five kilometres of sand running south from the town to the Naf estuary. Above the beach, the road from Chittagong runs through pine forests, hills, and a string of fishing villages. None of this, in 1799, anyone could have predicted. What the Company had built was a refugee camp. What grew from it was a town. The Naf River that the Arakanese had crossed remained the international border, first between Bengal and Burma, then between East Pakistan and Burma, then between Bangladesh and Myanmar. Two hundred and eighteen years after Captain Cox died, the same river would push another wave of refugees in the same direction. The religion would flip. The host would remain the same delta.'
+    ],
+    quote: 'He was a man of considerable industry and zeal in the public service.',
+    quoteAuthor: 'East India Company gazette obituary of Hiram Cox, 1799',
+    metrics: {
+      mraukUFell: '1784',
+      arakaneseResettled: '~40,000–50,000',
+      captainCoxDied: 'On the job, 1799',
+      townFounded: 'As a refugee resettlement project',
+      beachLength: '125 km (claimed longest unbroken)'
+    },
+    media: [{
+      type: 'photo',
+      motif: 'coxs-bazar-refuge',
+      image: 'coxs-bazar-beach.png',
+      caption: 'The Bay of Bengal at Cox\'s Bazar — the coast Captain Cox was sent to in 1798 to resettle Arakanese Buddhists fleeing Burma',
+      credit: 'Public Domain'
+    }],
+    sources: ['G. P. Ramachandra, "Captain Hiram Cox\'s Mission to Burma 1796–1798" (Journal of Southeast Asian Studies, 1980)', 'Banglapedia: "Cox, Hiram"', 'Banglapedia: "Rakhine community"', 'D. G. E. Hall, A History of South-East Asia']
   }),
 
   new TimelineEvent({
@@ -535,7 +584,7 @@ const TIMELINE = [
       'It was the first general strike in Pakistan\'s eight-month history. Picketers tried to lay siege to the secretariat. Police beat them and arrested several including Shamsul Huq, Oli Ahad, and a tall twenty-eight-year-old law student named Sheikh Mujibur Rahman. Pressure from student protests forced his release on 15 March. The next day Chief Minister Khwaja Nazimuddin signed an agreement promising a Bill in the Assembly making Bengali a state language. He did not deliver it. On 21 March, Muhammad Ali Jinnah stood at the Ramna Race Course in Dhaka and told a crowd of two hundred thousand: "the state language of Pakistan is going to be Urdu and no other language. Anyone who tries to mislead you is really the enemy of Pakistan." When he repeated the line at the Dhaka University convocation three days later, students shouted "no, no" from the audience. Mujib would later write: "The Language Movement did not start on 21 February 1952. It mainly started on 11 March 1948."',
       'Four years of agitation followed. On 21 February 1952, with Mujib in prison again after a 14 February arrest, students at Dhaka University defied Section 144 and marched. Police opened fire near Dhaka Medical College. Rafiq Uddin Ahmed, Abul Barkat, Abdul Jabbar, Abdus Salam, and a nine-year-old boy named Ohiullah were killed. The next day, 22 February, was worse. As the janazah procession moved through the city, police fired again. A thirty-four-year-old clerk named Shafiur Rahman, who had no part in the protest and was simply on his way to work, was shot dead on Nawabpur Road. Casualties were never officially counted.',
       'That night, at the Dhaka Medical College hostel, a small group led by sculptor Sayeed Haider and funded by the local Sardar Pearu Sardar of Hussaini Dalan began building a memorial in brick and concrete on the spot where the firing had happened. By dawn on 23 February the first Shaheed Minar stood, ten feet tall. Police demolished it three days later. They could not demolish what it had marked. The students built it again, in brick, in plaster, in concrete; the Pakistan Army destroyed it during Operation Searchlight in March 1971 and Bangladeshis rebuilt it again. The permanent monument by Hamidur Rahman and Novera Ahmed was finally completed in 1963.',
-      'In 1956, after eight years of strikes, arrests, and dead bodies, Pakistan amended its constitution to recognise Bengali alongside Urdu as a state language. By then Bangladesh was already inevitable. UNESCO declared 21 February International Mother Language Day on 17 November 1999. Every Ekushey, before dawn, Bangladeshis walk barefoot to the Shaheed Minar and place flowers at its foot. They are the only people in the history of the world to have died for a language. They are also the only people in the world with a day on the UN calendar to mark it.'
+      'In 1956, after eight years of strikes, arrests, and dead bodies, Pakistan amended its constitution to recognise Bengali alongside Urdu as a state language. By then Bangladesh was already inevitable. UNESCO declared 21 February International Mother Language Day on 17 November 1999. Every Ekushey, before dawn, Bangladeshis walk barefoot to the Shaheed Minar and place flowers at its foot. They are the only people in the history of the world to have died for a language. They are also the only people in the world with a day on the UN calendar to mark it. Today Bangla is the sixth most spoken native language on Earth, with two hundred and eighty-five million speakers. Three hundred million people speak the language because five of them refused, on a February afternoon in 1952, to speak any other.'
     ],
     quote: 'The Language Movement did not start on 21 February 1952. It mainly started on 11 March 1948.',
     quoteAuthor: 'Sheikh Mujibur Rahman, Daily Azad, 16 February 1971',
@@ -809,11 +858,12 @@ const TIMELINE = [
       'In 1978, Bangladeshi entrepreneur Noorul Quader signed a partnership with Daewoo of South Korea: 130 Bangladeshi workers travelled to Busan, trained for six months in a Daewoo factory, and came home to start Desh Garments. Most of those 130 went on to found their own factories. The industry compounded.',
       'By 2023, Bangladesh exported $38 billion in ready-made garments, 7.4% of the world total, second only to China\'s $165 billion. Vietnam was third at $31 billion. The industry employs about five million people, eighty percent of them women. For two generations of rural Bangladeshi women, the garment factory was the first thing that gave them a wage of their own.',
       'It came at a cost. In 2013 the Rana Plaza factory collapsed in Savar, killing 1,134 workers. It was the worst industrial disaster in modern history. The accord that followed forced global brands to fund factory safety inspections. But the wages remain among the lowest in the world. The miracle is real. The miracle is also still being negotiated.',
+      'Outside the factories, a second labour economy did the same work in reverse. Roughly five and a half million Bangladeshis live and work abroad, mostly on short-term contracts in the Gulf: two million in Saudi Arabia, seven hundred thousand in the UAE, six hundred and eighty thousand in Oman, four hundred thousand in Qatar where they are about an eighth of the entire population. Another six hundred and fifty thousand live in the United Kingdom, concentrated in Tower Hamlets in east London (the borough\'s Bangla-language nickname is Banglatown), and three hundred thousand in the United States, with the largest single concentration in Hamtramck, Michigan, a town with a Bangladeshi mayor and a Bangla-speaking city hall. In FY 2024–25 these workers sent home thirty billion dollars in remittances, up twenty-five percent year on year. After garments, it is the second-largest source of foreign exchange the country has. Two-thirds of all the foreign currency Bangladesh earns comes from the labour of poor women sewing in Dhaka and poor men building roads in Riyadh.',
       'Around the same period, Muhammad Yunus founded Grameen Bank in 1983 to extend microcredit to the rural poor, predominantly women. In 2006 he won the Nobel Peace Prize. Eighteen years later, after the 2024 uprising, he would be sworn in as Chief Adviser to a transitional government.'
     ],
     quote: 'Poverty is not created by the poor. It is created by the system.',
     quoteAuthor: 'Muhammad Yunus',
-    metrics: { rmgExports2023: '$38B', globalRank: '#2 (after China)', workers: '~5 million', womenWorkers: '80%' },
+    metrics: { rmgExports2023: '$38B', globalRank: '#2 (after China)', workers: '~5 million', womenWorkers: '80%', remittancesFY25: '$30B', bengalisAbroad: '~5.5 million' },
     media: [{
       type: 'photo',
       motif: 'garment-factory',
@@ -821,7 +871,51 @@ const TIMELINE = [
       caption: 'Sewing line, ready-made garment factory floor, Bangladesh',
       credit: 'Public Domain · BGMEA / industry documentation'
     }],
-    sources: ['WTO World Trade Statistics 2023', 'Naila Kabeer, The Power to Choose']
+    sources: ['WTO World Trade Statistics 2023', 'Naila Kabeer, The Power to Choose', 'Bangladesh Bank: Wage Earners\' Remittance Statistics FY 2024–25', 'BMET: Statistical Report on Overseas Employment']
+  }),
+
+  new TimelineEvent({
+    id: 'tiger-mangrove',
+    order: 19.25,
+    year: 1997,
+    dateDisplay: '1973 – present',
+    title: 'The Tiger and the Mangrove',
+    subtitle: 'Bonbibi\'s forest, where the delta meets the sea',
+    track: 'shared',
+    era: 'modern',
+    summary: 'Where the three great rivers of the Atlas finally end, the world\'s largest mangrove forest begins. In its salt-flooded creeks lives the only population of tigers on Earth that swims for a living, and the only deity in South Asia that Hindus and Muslims worship together to be protected from one.',
+    body: [
+      'South of every other story in this Atlas is the Sundarbans, the long curving forest where the Ganges, Brahmaputra and Meghna finally finish their three-thousand-kilometre journey by losing themselves in the Bay of Bengal. The name means "beautiful forest," after the sundari tree that dominates it. About ten thousand square kilometres in all, sixty percent in Bangladesh and forty in West Bengal, it is the largest contiguous mangrove forest on Earth and one of its most biologically productive natural systems. UNESCO inscribed the Indian side in 1987 and the Bangladeshi side in 1997. Three hundred and thirty-four plant species, four hundred fish species, three hundred birds, forty-two mammals, thirty-five reptiles. Salt water comes in on the tide twice a day and freshwater flows out from the rivers, and the forest survives in the brackish margin where almost nothing else would. The land is geologically newborn. Islands rise from silt, mature for a few centuries, then drown again as the sea inches up. The Sundarbans is one of the few places in the world where the map needs to be redrawn every generation.',
+      'In this forest lives a goddess who appears in no Vedic text, no Puranic catalogue, no formal Islamic theology, and whose worship crosses every religious boundary the rest of Bengal observes. Bonbibi — the Lady of the Forest, daughter of a Sufi fakir, chosen by Allah to defeat the tyrant of the Sundarbans — is venerated by Hindus and Muslims together as the protector of the woodcutters, the honey-collectors, and the fishermen who enter the forest knowing that some of them will not come back. Her adversary is Dakshin Rai, the Lord of the South, a zamindar in human form who turns into a tiger to eat people. Bonbibi defeats him but does not kill him. Instead, with the mediation of a third figure — Ghazi Miyan, a Sufi warrior-saint also called Bar Khan Gazi — she divides the forest itself. Half of it belongs to humans; half belongs to the tiger; cross into the other half and you forfeit Bonbibi\'s protection. The Mouli who collects honey and the Bauli who cuts firewood will both, before entering, recite a prayer to Bonbibi and bind a clay mask of Dakshin Rai to the back of their head, because a Sundarbans tiger almost always attacks from behind, and the second face is meant to confuse it. The Bonbibi Johurnama, the verse cycle that records the legend, was composed in the late nineteenth century and is read aloud in village courtyards to this day. There is no other deity quite like her in South Asia.',
+      'The animal she divides the forest with is Panthera tigris tigris, the Bengal tiger, the national animal of both India and Bangladesh, an apex predator whose Latin name is a tautology because it was originally named after this place. Sundarbans tigers are unique among the world\'s remaining tiger populations: they swim long distances between islands, they hunt fish, crab, and water monitor lizard as well as deer and wild boar, they tolerate brackish water no other big cat can drink, and they have the highest documented frequency of attacks on humans of any tiger population on Earth. In the colonial period the Raj turned tiger-hunting into theatre — a Viceroy on an elephant, a hundred beaters in the bush, photographs sent home to London — and the population that had once ranged across the entire subcontinent collapsed onto a few last refuges. The Sundarbans, dense and difficult and not worth clearing, became the largest of those refuges. By Indian independence the wild Bengal tiger was a remnant species. By 1972 there were perhaps eighteen hundred left in the entire country.',
+      'Indira Gandhi launched Project Tiger in 1973 and the Sundarbans Tiger Reserve was declared in the same year on the Indian side. Bangladesh, three years independent, inherited the framework and ran its own version of it. Conservation in the Sundarbans is not glamorous work. Patrol vessels in the creeks, net fences between forest and village, camera traps in the canopy, foresters quietly buried after meeting the wrong tiger on the wrong path. It has produced measurable results: in the most recent Bangladesh camera-trap census in 2024, biologists counted one hundred and twenty-five adult tigers, up from one hundred and fourteen in 2018 and one hundred and six in 2015 — a seventeen percent increase in nine years, set against a global trend in the opposite direction. The forest itself is in worse shape than the cat. Cyclone Sidr in November 2007 damaged a quarter of it. Cyclone Amphan in 2020 took out another large slice. Sea-level rise is pushing the salt line further inland every decade; upstream dams on the Indian Ganges have cut the dry-season freshwater the forest needs by close to forty percent; the sundari tree itself is dying back in the saltier zones. The tiger is recovering. The forest underneath the tiger is losing ground. Bangladesh in the twenty-first century is the country most exposed to climate change of any large nation on Earth, and the Sundarbans is the frontline. If the forest goes, the storms reach Dhaka. The tiger is the symbol. The mangrove is the structure. Bonbibi knew which of them to pray to first.'
+    ],
+    quote: 'বনবিবি মা, রক্ষা কর। · Mother Bonbibi, protect us.',
+    quoteAuthor: 'The standard invocation of woodcutters and honey-collectors before entering the Sundarbans forest',
+    metrics: {
+      forestArea: '~10,000 km² · 60% Bangladesh · 40% India',
+      unescoInscription: '1987 (India) · 1997 (Bangladesh)',
+      tigerCensus: '106 (2015) → 114 (2018) → 125 (2024)',
+      biodiversity: '334 plants · 400 fish · 300 birds · 42 mammals',
+      cyclonesSurvived: 'Sidr 2007 · Amphan 2020 · Remal 2024',
+      bonbibiText: 'Bonbibi Johurnama, late 19th c.'
+    },
+    media: [{
+      type: 'photo',
+      motif: 'tiger-mangrove',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pir%20Gazi%20and%20his%20tiger%20in%20Sundarbans.jpg?width=800',
+      caption: 'Scene from a Gazi scroll, Bengal, 18th or 19th century. The Sufi saint Pir Gazi rides a tiger through the Sundarbans, the central image of the syncretic cosmology that Hindus and Muslims of the delta share.',
+      credit: 'British Museum · Public Domain'
+    }],
+    sources: [
+      'UNESCO World Heritage: The Sundarbans (Bangladesh, inscribed 1997)',
+      'UNESCO World Heritage: Sundarbans National Park (India, inscribed 1987)',
+      'M. M. Aziz et al., Status of Tigers in the Sundarbans of Bangladesh 2024 (Bangladesh Forest Department / WildTeam)',
+      'IUCN World Heritage Outlook: The Sundarbans (2025)',
+      'Annu Jalais, Forest of Tigers: People, Politics and Environment in the Sundarbans (2010)',
+      'Sutapa Chatterjee Sarkar, The Sundarbans: Folk Deities, Monsters and Mortals (2010)',
+      'Banglapedia: Bonbibi, Sundarbans'
+    ]
   }),
 
   new TimelineEvent({
@@ -909,36 +1003,33 @@ const TIMELINE = [
   }),
 
   new TimelineEvent({
-    id: 'coxs-bazar',
+    id: 'rohingya-crisis',
     order: 20.75,
     year: 2017,
-    dateDisplay: '25 August 2017 (and 1799)',
-    title: 'Cox\'s Bazar',
-    subtitle: 'The same refuge, two centuries apart',
+    dateDisplay: '25 August 2017 – present',
+    title: 'The Rohingya Crisis',
+    subtitle: 'The largest refugee settlement on Earth, on the same delta',
     track: 'bangladesh',
     era: 'modern',
-    summary: 'In 1799, a British captain settled 40,000 Arakanese fleeing the Burmese army into a market town that would carry his name. In 2017, the great-great-grandchildren of that same delta took in nearly a million people fleeing the same border.',
+    summary: 'Two hundred and eighteen years after Captain Cox died running a refugee camp at Palongkee, the same river produced another wave. In ten weeks of late 2017, more than seven hundred and forty thousand Rohingya Muslims crossed the Naf into Bangladesh, fleeing a Burmese-army campaign the United States and the ICJ would later call genocide. Most have not gone home.',
     body: [
-      'Captain Hiram Cox was an East India Company officer sent to a fishing outpost called Palongkee in 1798. His job was to do something the Company rarely bothered with: house refugees. The Burmese army had invaded Arakan in 1784, ending the Mrauk U kingdom and driving Buddhist Rakhine families across the Naf River into Company-controlled Bengal. Cox died in 1799 with roughly 40,000 to 50,000 of them resettled. To mark his work, his colleagues named the local market after him. Cox\'s Bazar.',
-      'Two hundred and eighteen years later, the same border produced another wave. On 25 August 2017, Myanmar\'s army launched a campaign of mass killing, rape, and village burning against the Rohingya, a Muslim people from Rakhine state, the territory that had been Arakan in Cox\'s time. In ten weeks, more than 740,000 Rohingya walked across the Naf into Bangladesh. By 2024 the camps at Kutupalong-Balukhali, just south of Cox\'s Bazar town, sheltered about a million people: the largest refugee settlement on Earth, on land that had once been forest, in a district that had taken in Buddhist refugees from the same place over two centuries earlier.',
-      'The historical rhyme is exact and uncomfortable. The persecutor is a successor of the same Burmese state. The river crossed is the same. The host is the same delta. Only the religion has flipped: in 1799 the refuges were Buddhists fleeing a Buddhist invader; in 2017 the refugees are Muslims fleeing a Buddhist state. Bangladesh, one of the poorest large countries in the world, took them in. The UN has called the Rohingya the most persecuted minority on Earth. Whether they will ever go home is the question the camps cannot answer.'
+      'The Rohingya are a Muslim ethnic group from the northern part of Rakhine State in Myanmar, on the eastern shore of the Naf River. Their presence in the region is documented from at least the fifteenth century, when Muslim Bengali soldiers and administrators served the Buddhist Arakanese kings of Mrauk U. After Burmese independence in 1948, that history was steadily written out of the official one. In 1962 the military regime of Ne Win began stripping Rohingya of citizenship rights they had held under the post-colonial 1949 Residents of Myanmar Registration Act. In 1978 a military operation called Naga Min, Dragon King, drove about two hundred and fifty thousand Rohingya into Bangladesh; international pressure forced repatriation a few years later. Then in 1982 came the act that would do the structural work: the Burma Citizenship Law, which restricted full citizenship to those who could prove descent from one of the country\'s 135 officially recognised "national races," a list that pointedly excluded the Rohingya. To qualify by naturalisation a person had to prove their family had lived in Burma before the first Anglo-Burmese war of 1823, a near-impossible documentary bar. After 1982 the Rohingya were effectively stateless in the country they had been born in. Another roughly two hundred and fifty thousand fled to Bangladesh during the 1991–92 military operations.',
+      'On 25 August 2017, militants of the Arakan Rohingya Salvation Army attacked thirty police posts in northern Rakhine, killing twelve officers. The response was disproportionate by an order of magnitude. The Tatmadaw — the Burmese army — launched what it called clearance operations, with auxiliary forces drawn from Rakhine Buddhist communities, across hundreds of Rohingya villages. The work was systematic. Villages were surrounded, men and boys separated and shot in groups, women and girls raped and then in many cases burned alive in their homes, the village then razed and the ash mass-graved. Médecins Sans Frontières estimated at least six thousand seven hundred Rohingya killed in the first month alone, including at least seven hundred and thirty children under five. The actual death toll is almost certainly higher and has never been counted. The survivors walked. By the end of October, more than seven hundred and forty thousand had crossed the Naf into Bangladesh, joining the roughly three hundred thousand from earlier waves who had never been able to return.',
+      'They settled at Kutupalong-Balukhali, on the road south of Cox\'s Bazar town. The Bangladeshi government, with one of the world\'s smallest per-capita land budgets, cleared two thousand hectares of forest reserve and let them stay. Within a year the settlement was the largest single refugee camp on Earth, sheltering close to a million people in bamboo-and-tarpaulin shelters running shoulder to shoulder up the hills. Half a decade later it still is. Some Rohingya have been moved to Bhasan Char, a silt-island in the Bay of Bengal that surfaced in 2006, in a relocation scheme international observers have called involuntary. The camps in 2025 are nominally closed to NGO movement and increasingly subject to militia violence; ARSA itself has been assassinating Rohingya community leaders inside the camps for years. Repatriation has been negotiated three times and has failed three times. The Rohingya cannot go back to a Myanmar that does not consider them citizens.',
+      'In November 2019 the small West African republic of The Gambia, on behalf of the fifty-seven members of the Organisation of Islamic Cooperation, filed a case at the International Court of Justice in The Hague accusing Myanmar of violating the 1948 Genocide Convention. In January 2020 the Court ordered Myanmar to take all measures in its power to prevent further acts of genocide against the Rohingya. In March 2022 the United States State Department officially determined that the 2017 Tatmadaw campaign had constituted genocide and crimes against humanity, only the eighth such determination the US has ever made. In July 2022 the ICJ rejected Myanmar\'s preliminary objections and found it had jurisdiction. From 12 to 29 January 2026, three months ago, the Court held public hearings on the merits of the case at the Peace Palace. A verdict is pending. Whatever it says, the camps remain. The Rohingya remain. The UN continues to call them the most persecuted minority on Earth, and Bangladesh, one of the poorest large countries in the world, continues to host them, on the same delta that took the Arakanese Buddhists in 1799, on the same coastline that buried Hiram Cox.'
     ],
     quote: 'We came with nothing. The people on this side gave us rice.',
     quoteAuthor: 'A Rohingya woman, Kutupalong camp, 2018',
     metrics: {
-      arakanese1799: '~40,000–50,000',
-      rohingya2017: '740,000+ in 10 weeks',
-      campPopulation: '~1 million today',
-      yearsBetween: '218'
+      citizenshipStripped: '1982 Burma Citizenship Law',
+      earlierWaves: '~250K (1978) · ~250K (1991–92)',
+      crossing2017: '740,000+ in 10 weeks',
+      msfFirstMonthDeaths: '~6,700 killed incl. 730 under 5',
+      campPopulation: '~1 million at Kutupalong-Balukhali',
+      icjHearings: '12–29 January 2026 (verdict pending)'
     },
-    media: [{
-      type: 'photo',
-      motif: 'coxs-bazar-refuge',
-      image: 'coxs-bazar-beach.png',
-      caption: 'The Bay of Bengal coast at Cox\'s Bazar — same shore where Arakanese refugees came ashore in 1799 and Rohingya in 2017',
-      credit: 'Public Domain'
-    }],
-    sources: ['UNHCR Bangladesh', 'G. P. Ramachandra, "Captain Hiram Cox\'s Mission to Burma 1796–1798"', 'World Bank report on Rohingya refugee camps', 'Dhaka Tribune, "The legacy of Hiram Cox"']
+    media: [{ type: 'pattern', motif: 'rohingya-camp' }],
+    sources: ['UNHCR Bangladesh — Cox\'s Bazar Operations', 'Médecins Sans Frontières mortality survey, December 2017', 'International Court of Justice — The Gambia v. Myanmar', 'US State Department determination, 21 March 2022', 'Independent Investigative Mechanism for Myanmar (IIMM)', 'Human Rights Watch reports']
   }),
 
   new TimelineEvent({
@@ -1000,8 +1091,8 @@ const ERAS = [
     range: 'Before history',
     kicker: 'Every scene in this story sits on a river. The Ajay, the Padma, the Ganges, the Brahmaputra. This piece opens by surfacing the river as the spine.'
   },
-  { id: 'origins',    label: 'Origins',           range: 'c. 1600 BCE – 3rd c. BCE' },
-  { id: 'medieval',   label: 'Empires & Faith',   range: '750 – 1757 CE' },
+  { id: 'origins',    label: 'Origins',           range: 'c. 10,000 BC – 3rd c. BC' },
+  { id: 'medieval',   label: 'Empires & Faith',   range: '750 – 1757 AD' },
   { id: 'colonial',   label: 'The British Century', range: '1757 – 1947' },
   { id: 'partition',  label: 'Partition',         range: '1947' },
   { id: 'pakistan',   label: 'Two Wings',         range: '1947 – 1971' },

@@ -53,7 +53,7 @@ const ContentRenderer = {
     section.innerHTML = `
       <div class="eyebrow" style="margin-bottom: 1.5rem;">A fork in the road</div>
       <h2>From here, two countries.</h2>
-      <p style="max-width: 60ch; margin: 0 auto 2rem; color: var(--ink-soft); font-size: 1.1rem; line-height: 1.6;">
+      <p style="max-width: 60ch; margin: 0 auto 2rem; color: var(--fg-soft); font-size: 1.1rem; line-height: 1.6;">
         After 1947 the Bengali people are governed by two states with two flags, two scripts of nationalism,
         two political grammars. Some scenes ahead are shared (the language movement, the diaspora) but most
         belong to one Bengal or the other. You can read both, or filter by one.
@@ -233,7 +233,7 @@ const SceneIllustration = {
       </g>
       <g font-family="JetBrains Mono, monospace" font-size="10" fill="#5C4E3F" letter-spacing="2">
         <text x="20" y="30">PANDU RAJAR DHIBI</text>
-        <text x="20" y="480">c. 1600–1400 BCE</text>
+        <text x="20" y="480">c. 1600–1400 BC</text>
       </g>
     </svg>`;
   },
@@ -334,7 +334,7 @@ const SceneIllustration = {
         </g>
       </g>
       <g font-family="JetBrains Mono, monospace" font-size="10" fill="#B8923B" letter-spacing="2">
-        <text x="20" y="30">601 AH · 1204 CE</text>
+        <text x="20" y="30">601 AH · 1204 AD</text>
         <text x="20" y="480">GHURID GOLD TANKA · LAKHNAUTI</text>
       </g>
     </svg>`;
@@ -487,7 +487,7 @@ const SceneIllustration = {
       <!-- Date plate floating beside the coin -->
       <g transform="translate(60,200)" font-family="JetBrains Mono, monospace" fill="#B8923B" opacity="0.9">
         <text x="0" y="0" font-size="11" letter-spacing="2">1129 AH</text>
-        <text x="0" y="14" font-size="9" letter-spacing="2" opacity="0.7">1717 CE</text>
+        <text x="0" y="14" font-size="9" letter-spacing="2" opacity="0.7">1717 AD</text>
       </g>
 
       <!-- Caption -->
@@ -1278,7 +1278,7 @@ const SceneIllustration = {
         <!-- Pin layout, west-to-east-ish: -->
 
         <!-- Mahasthangarh (north, on the old Karatoya near Bogra) -->
-        <g class="delta-pin" data-target="scene-mahasthangarh" transform="translate(195,165)" tabindex="0" role="button" aria-label="Jump to Mahasthangarh, c. 300 BCE">
+        <g class="delta-pin" data-target="scene-mahasthangarh" transform="translate(195,165)" tabindex="0" role="button" aria-label="Jump to Mahasthangarh, c. 300 BC">
           <circle class="delta-pin-glow" r="14" fill="#B5532A" opacity="0"/>
           <circle class="delta-pin-dot"  r="5" fill="#B5532A" stroke="#E6DDC8" stroke-width="1.5"/>
           <text x="10" y="3" class="delta-pin-label" font-family="JetBrains Mono, monospace" font-size="9" fill="#1A1410">MAHASTHANGARH</text>
@@ -1313,10 +1313,17 @@ const SceneIllustration = {
         </g>
 
         <!-- Cox's Bazar (far SE) -->
-        <g class="delta-pin" data-target="scene-coxs-bazar" transform="translate(355,415)" tabindex="0" role="button" aria-label="Jump to Cox's Bazar, 1799 and 2017">
+        <g class="delta-pin" data-target="scene-coxs-bazar" transform="translate(355,415)" tabindex="0" role="button" aria-label="Jump to Cox's Bazar, 1799">
           <circle class="delta-pin-glow" r="14" fill="#B5532A" opacity="0"/>
           <circle class="delta-pin-dot"  r="5" fill="#B5532A" stroke="#E6DDC8" stroke-width="1.5"/>
           <text x="-72" y="3" class="delta-pin-label" font-family="JetBrains Mono, monospace" font-size="9" fill="#1A1410">COX'S BAZAR</text>
+        </g>
+
+        <!-- Sundarbans (southern coastal mangrove, between Kolkata and Cox's Bazar) -->
+        <g class="delta-pin" data-target="scene-tiger-mangrove" transform="translate(220,455)" tabindex="0" role="button" aria-label="Jump to the Sundarbans, 1997">
+          <circle class="delta-pin-glow" r="14" fill="#B5532A" opacity="0"/>
+          <circle class="delta-pin-dot"  r="5" fill="#B5532A" stroke="#E6DDC8" stroke-width="1.5"/>
+          <text x="10" y="3" class="delta-pin-label" font-family="JetBrains Mono, monospace" font-size="9" fill="#1A1410">SUNDARBANS</text>
         </g>
 
         <!-- Bay of Bengal label -->
@@ -1386,6 +1393,195 @@ const SceneIllustration = {
             font-size="9" fill="#B8923B" letter-spacing="3">STATELESS · 66 CAMPS · 50+ YEARS</text>
       <g font-family="JetBrains Mono, monospace" font-size="10" fill="#B8923B" letter-spacing="2">
         <text x="20" y="30">CAMP GENEVA · DHAKA</text>
+      </g>
+    </svg>`;
+  },
+
+  // Rohingya at Kutupalong-Balukhali — the visual idiom: an aerial
+  // site-plan grid (the camp's repeating rows of shelters running up
+  // hillsides, the structural fact of scale) on top of a blank
+  // citizenship document stamped diagonally with "STATELESS" (the
+  // legal fact of the 1982 Citizenship Law). No people drawn. The
+  // gravity of the subject calls for restraint, not iconography.
+  'rohingya-camp'() {
+    return `<svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="500" fill="#3A2E24"/>
+
+      <!-- Top label -->
+      <g font-family="JetBrains Mono, monospace" fill="#B8923B" letter-spacing="2">
+        <text x="20" y="30" font-size="10">KUTUPALONG-BALUKHALI · COX'S BAZAR DISTRICT</text>
+      </g>
+
+      <!-- Top half: aerial site-plan grid of shelter rows -->
+      <!-- The grid runs in two slightly skewed bands suggesting the camp climbing the hills -->
+      <g fill="#5C4E3F" stroke="#3A2E24" stroke-width="0.5">
+        <!-- Upper band, slightly tilted -->
+        <g transform="translate(40,60) rotate(-3)">
+          ${Array.from({length: 7}).map((_, row) =>
+            Array.from({length: 16}).map((_, col) => {
+              const x = col * 19;
+              const y = row * 14;
+              return `<rect x="${x}" y="${y}" width="14" height="8"/>`;
+            }).join('')
+          ).join('')}
+        </g>
+        <!-- Slight gap, then second band tilting the other way -->
+        <g transform="translate(50,178) rotate(2)">
+          ${Array.from({length: 5}).map((_, row) =>
+            Array.from({length: 15}).map((_, col) => {
+              const x = col * 19;
+              const y = row * 14;
+              return `<rect x="${x}" y="${y}" width="14" height="8"/>`;
+            }).join('')
+          ).join('')}
+        </g>
+      </g>
+
+      <!-- Path/road threading through the camp (faint) -->
+      <path d="M 50 100 Q 180 130 280 90 Q 350 80 380 110"
+            fill="none" stroke="#1A1410" stroke-width="1.2" opacity="0.55"/>
+      <path d="M 60 200 Q 200 220 340 195"
+            fill="none" stroke="#1A1410" stroke-width="1.2" opacity="0.55"/>
+
+      <!-- Divider between the camp grid and the document below -->
+      <line x1="20" y1="280" x2="380" y2="280" stroke="#B8923B" stroke-width="0.4" opacity="0.4"/>
+
+      <!-- Lower half: a blank Burmese citizenship card -->
+      <g transform="translate(50,310)">
+        <!-- Document body -->
+        <rect width="300" height="160" rx="3" fill="#E6DDC8" stroke="#5C4E3F" stroke-width="1"/>
+        <!-- Header bar -->
+        <rect x="0" y="0" width="300" height="22" fill="#1F3A5F"/>
+        <text x="10" y="15" font-family="JetBrains Mono, monospace" font-size="9"
+              fill="#F1EADA" letter-spacing="2">REPUBLIC OF THE UNION OF MYANMAR</text>
+        <!-- "Photo" placeholder (empty) -->
+        <rect x="14" y="34" width="56" height="70" fill="#D6CBB1" stroke="#5C4E3F" stroke-width="0.5"/>
+        <text x="42" y="73" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="7" fill="#5C4E3F" letter-spacing="1">NO RECORD</text>
+        <!-- Name / particulars lines (all blank) -->
+        <g font-family="JetBrains Mono, monospace" font-size="7" fill="#5C4E3F" letter-spacing="1.5">
+          <text x="84" y="42">NAME</text>
+          <line x1="84" y1="50" x2="280" y2="50" stroke="#5C4E3F" stroke-width="0.4" opacity="0.5"/>
+          <text x="84" y="64">NATIONAL RACE</text>
+          <line x1="84" y1="72" x2="280" y2="72" stroke="#5C4E3F" stroke-width="0.4" opacity="0.5"/>
+          <text x="84" y="86">CITIZENSHIP STATUS</text>
+          <line x1="84" y1="94" x2="280" y2="94" stroke="#5C4E3F" stroke-width="0.4" opacity="0.5"/>
+          <text x="14" y="120">ISSUED UNDER THE 1982 CITIZENSHIP LAW</text>
+        </g>
+
+        <!-- Diagonal STATELESS stamp -->
+        <g transform="translate(150,90) rotate(-18)">
+          <rect x="-90" y="-18" width="180" height="36" fill="none"
+                stroke="#8E3E1F" stroke-width="2.5" opacity="0.85"/>
+          <text x="0" y="6" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="22" font-weight="600" fill="#8E3E1F"
+                letter-spacing="6" opacity="0.9">STATELESS</text>
+        </g>
+      </g>
+
+      <!-- Bottom metric labels -->
+      <g font-family="JetBrains Mono, monospace" fill="#B8923B" letter-spacing="3">
+        <text x="200" y="492" text-anchor="middle" font-size="9">~1 MILLION · LARGEST REFUGEE SETTLEMENT ON EARTH</text>
+      </g>
+    </svg>`;
+  },
+
+  // The Tiger and the Mangrove — SVG fallback. The intended primary
+  // visual is the British Museum Gazi scroll photo. If that fails to
+  // load, this motif takes over: a forest-night palette with the
+  // silhouette of a tiger emerging from mangrove waterways and the
+  // Bangla "বনবিবি" (Bonbibi) name carrying the spiritual reference.
+  // Restraint over wildlife-cliché: no roaring tiger close-ups.
+  'tiger-mangrove'() {
+    return `<svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+      <!-- Forest night ground -->
+      <rect width="400" height="500" fill="#1A1410"/>
+      <!-- Subtle moonlight wash -->
+      <ellipse cx="200" cy="180" rx="220" ry="120" fill="#3A2E24" opacity="0.55"/>
+
+      <!-- Top label -->
+      <g font-family="JetBrains Mono, monospace" fill="#B8923B" letter-spacing="2">
+        <text x="20" y="30" font-size="10">SUNDARBANS · ~10,000 KM² · LARGEST MANGROVE ON EARTH</text>
+      </g>
+
+      <!-- Mangrove root silhouettes — the distinctive stilted Sundarbans root system -->
+      <g stroke="#5C4E3F" fill="none" stroke-width="1.2" opacity="0.7">
+        <!-- Left cluster -->
+        <path d="M 40 380 L 35 320 M 40 380 L 50 320 M 40 380 L 28 350 M 40 380 L 55 350"/>
+        <path d="M 70 385 L 65 310 M 70 385 L 80 320 M 70 385 L 60 340 M 70 385 L 85 350"/>
+        <path d="M 100 380 L 95 315 M 100 380 L 110 305 M 100 380 L 90 340 M 100 380 L 115 345"/>
+        <!-- Right cluster -->
+        <path d="M 300 380 L 295 320 M 300 380 L 310 315 M 300 380 L 288 350 M 300 380 L 315 350"/>
+        <path d="M 330 385 L 325 310 M 330 385 L 340 320 M 330 385 L 320 340 M 330 385 L 345 350"/>
+        <path d="M 360 380 L 355 315 M 360 380 L 370 305 M 360 380 L 350 340 M 360 380 L 375 345"/>
+      </g>
+
+      <!-- Tidal water level between mangrove clusters -->
+      <line x1="20" y1="382" x2="380" y2="382" stroke="#1F3A5F" stroke-width="0.8" opacity="0.5"/>
+      <line x1="20" y1="388" x2="380" y2="388" stroke="#1F3A5F" stroke-width="0.4" opacity="0.35"/>
+
+      <!-- The tiger — stylised stalking silhouette in profile -->
+      <g fill="#B5532A" opacity="0.92">
+        <!-- Elongated body with a slight back arch -->
+        <path d="M 130 360
+                 L 130 348
+                 Q 135 342 150 340
+                 L 230 339
+                 Q 248 339 256 345
+                 L 256 358
+                 L 250 360
+                 L 142 360 Z"/>
+        <!-- Neck connecting body to head -->
+        <path d="M 250 345 L 262 340 L 270 340 L 268 352 L 256 354 Z"/>
+        <!-- Head — more angular, with suggestion of ears and snout -->
+        <path d="M 268 338
+                 L 282 335
+                 L 290 339
+                 L 290 348
+                 L 280 354
+                 L 272 354
+                 L 268 348 Z"/>
+        <!-- Two ears on top of head -->
+        <path d="M 271 335 L 274 330 L 276 335 Z"/>
+        <path d="M 282 333 L 285 328 L 288 334 Z"/>
+        <!-- Four legs — small vertical strokes suggesting stride -->
+        <rect x="142" y="358" width="3" height="14"/>
+        <rect x="162" y="358" width="3" height="14"/>
+        <rect x="232" y="358" width="3" height="14"/>
+        <rect x="252" y="358" width="3" height="14"/>
+        <!-- Long tail curving back -->
+        <path d="M 130 350 Q 115 348 105 342 Q 98 338 100 330 Q 102 326 108 326"
+              stroke="#B5532A" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </g>
+      <!-- Tiger stripes — minimal, suggestive of the species -->
+      <g stroke="#3A2E24" stroke-width="1" fill="none" opacity="0.85">
+        <path d="M 155 343 L 158 358"/>
+        <path d="M 175 342 L 178 358"/>
+        <path d="M 195 342 L 198 358"/>
+        <path d="M 215 342 L 218 358"/>
+        <path d="M 235 343 L 238 358"/>
+      </g>
+      <!-- Two small white eyes in the head -->
+      <circle cx="278" cy="343" r="1" fill="#F1EADA"/>
+      <circle cx="285" cy="343" r="1" fill="#F1EADA"/>
+
+      <!-- Bangla name of the forest goddess, large, above the tiger — the spiritual frame -->
+      <text x="200" y="125" text-anchor="middle" font-family="Hind Siliguri, serif"
+            font-size="34" fill="#E6DDC8">বনবিবি</text>
+      <text x="200" y="148" text-anchor="middle" font-family="Fraunces, serif"
+            font-style="italic" font-size="13" fill="#E6DDC8" opacity="0.78">Bonbibi · Lady of the Forest</text>
+
+      <!-- Decorative dashed division — the forest split between humans and tiger -->
+      <line x1="80" y1="240" x2="320" y2="240" stroke="#B8923B" stroke-width="0.5"
+            stroke-dasharray="3 5" opacity="0.5"/>
+      <text x="90" y="234" font-family="JetBrains Mono, monospace" font-size="7"
+            fill="#B8923B" letter-spacing="1.5" opacity="0.7">FOR HUMANS</text>
+      <text x="310" y="234" text-anchor="end" font-family="JetBrains Mono, monospace"
+            font-size="7" fill="#B8923B" letter-spacing="1.5" opacity="0.7">FOR THE TIGER</text>
+
+      <!-- Bottom metric bar -->
+      <g font-family="JetBrains Mono, monospace" fill="#B8923B" letter-spacing="3">
+        <text x="200" y="478" text-anchor="middle" font-size="9">PANTHERA TIGRIS TIGRIS · 125 IN BANGLADESH SUNDARBANS · 2024</text>
       </g>
     </svg>`;
   },
@@ -1495,7 +1691,7 @@ class SidePanelController {
   constructor(rootSelector) {
     this.root = document.querySelector(rootSelector);
     this.state = {
-      year: '— BCE',
+      year: '— BC',
       era: 'Origins',
       track: 'Shared',
       headline: 'Bengal in formation'
@@ -1547,10 +1743,13 @@ class SidePanelController {
 
     const era = ERAS.find(e => e.id === event.era);
     // For the geography prologue (year very old / no fixed year), use a friendly label.
+    // AD is only useful for first-millennium years where the reader might wonder if it's
+    // BC; modern years (1000+) display bare.
     const yearLabel =
       event.year <= -5000 ? 'Before history'
-      : event.year < 0    ? `${Math.abs(event.year)} BCE`
-      : `${event.year} CE`;
+      : event.year < 0    ? `${Math.abs(event.year)} BC`
+      : event.year < 1000 ? `${event.year} AD`
+      : String(event.year);
 
     this.update({
       year: yearLabel,
@@ -1719,8 +1918,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render the timeline
   ContentRenderer.renderTimeline(document.getElementById('timeline'));
 
-  // Render the diaspora chart
-  renderDiaspora(document.querySelector('.diaspora-chart'));
+  // (Diaspora chart removed — facts folded into the Garment Miracle timeline entry)
 
   // Initialize controllers
   const sidePanel = new SidePanelController('.side-panel');
@@ -2110,12 +2308,12 @@ class TOCController {
 
   /** Resolve a display-friendly year label for the TOC. */
   formatYear(year, dateDisplay) {
-    // The year field is signed (negative = BCE). Prefer a short label
+    // The year field is signed (negative = BC). Prefer a short label
     // that maps closely to the dateDisplay for periods we already
     // hand-curated. For broader cases, fall back to derived text.
     if (typeof year !== 'number') return dateDisplay || '';
-    if (year <= -1000)  return `${Math.abs(year)} BCE`;
-    if (year < 0)       return `${Math.abs(year)} BCE`;
+    if (year <= -1000)  return `${Math.abs(year)} BC`;
+    if (year < 0)       return `${Math.abs(year)} BC`;
     if (year === 0)     return '0';
     return String(year);
   }
@@ -2446,7 +2644,7 @@ class SearchController {
   /** Same year-formatting heuristic the TOC uses (kept local for independence). */
   formatYear(year, dateDisplay) {
     if (typeof year !== 'number') return dateDisplay || '';
-    if (year < 0) return `${Math.abs(year)} BCE`;
+    if (year < 0) return `${Math.abs(year)} BC`;
     return String(year);
   }
 
@@ -2492,12 +2690,13 @@ class DeltaMapController {
 
     // City metadata for the tooltip — keyed by scene id
     this.cityInfo = {
-      'scene-mahasthangarh':       { title: 'Mahasthangarh',   sub: 'c. 300 BCE · oldest city, Mauryan capital' },
+      'scene-mahasthangarh':       { title: 'Mahasthangarh',   sub: 'c. 300 BC · oldest city, Mauryan capital' },
       'scene-bengal-sultanate':    { title: 'Gaur',             sub: '1342 – 1576 · Bengal Sultanate capital'    },
       'scene-nawabs-murshidabad':  { title: 'Murshidabad',     sub: '1717 – 1757 · Nawab capital'                },
       'scene-mughal-islamization': { title: 'Dhaka',            sub: 'founded 1610 by Islam Khan Chishti'         },
       'scene-renaissance':         { title: 'Kolkata',          sub: '19th c. · Bengal Renaissance, British India'},
-      'scene-coxs-bazar':          { title: 'Cox\'s Bazar',     sub: '1799 / 2017 · twice a refuge'               }
+      'scene-coxs-bazar':          { title: 'Cox\'s Bazar',     sub: '1798–1799 · founded as a refugee camp'      },
+      'scene-tiger-mangrove':      { title: 'Sundarbans',       sub: 'Largest mangrove on Earth · Bonbibi\'s forest' }
     };
   }
 
